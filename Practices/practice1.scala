@@ -24,3 +24,5 @@ var PrintTweet: String = Write + Bird
 
 val msn = "Hola Luke yo soy tu padre!"
 msn slice (5,9)
+
+//5 Los valores de "val" son inmutables a diferencia de "var" que los valores van cambiando.
