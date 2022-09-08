@@ -19,11 +19,15 @@ var Write: String = "Estoy escribiendo un "
 var PrintTweet: String = Write + Bird
 
 
-//4. Dada la variable mensaje = "Hola Luke yo soy tu padre!" utiliza slilce para extraer la
+//Dada la variable mensaje = "Hola Luke yo soy tu padre!" utiliza slilce para extraer la
 //   secuencia "Luke"
 
 val msn = "Hola Luke yo soy tu padre!"
 msn slice (5,9)
 
-//5. Cual es la diferencia entre value y una variable en scala?
-//5 Los valores de "val" son inmutables a diferencia de "var" que los valores van cambiando.
+//¿Cual es la diferencia entre value y una variable en scala?
+//Los valores de "val" son inmutables a diferencia de "var" que los valores van cambiando.
+
+//Dada la tupla (2,4,5,1,2,3,3.1416,23) regresa el numero 3.1416
+val tup = (2,4,5,1,2,3,3.1416,23) 
+tup._7
