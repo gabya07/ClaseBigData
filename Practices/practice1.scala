@@ -17,3 +17,10 @@ if (num % 2 == 0) {
 var Bird: String = "tweet"
 var Write: String = "Estoy escribiendo un "
 var PrintTweet: String = Write + Bird
+
+
+//4. Dada la variable mensaje = "Hola Luke yo soy tu padre!" utiliza slilce para extraer la
+//   secuencia "Luke"
+
+val msn = "Hola Luke yo soy tu padre!"
+msn slice (5,9)
