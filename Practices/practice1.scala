@@ -10,3 +10,10 @@ if (num % 2 == 0) {
 } else {
     printf("Si es número primo")
 }
+
+// Dada la variable bird = "tweet", utiliza interpolacion de string para
+    imprimir "Estoy ecribiendo un tweet"
+
+var Bird: String = "tweet"
+var Write: String = "Estoy escribiendo un "
+var PrintTweet: String = Write + Bird
