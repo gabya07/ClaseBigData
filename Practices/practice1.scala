@@ -15,8 +15,7 @@ if (num % 2 == 0) {
     imprimir "Estoy ecribiendo un tweet"
 
 var Bird: String = "tweet"
-var Write: String = "Estoy escribiendo un "
-var PrintTweet: String = Write + Bird
+var PrintTweet = s"Estoy escribiendo un ${Bird}"
 
 
 //Dada la variable mensaje = "Hola Luke yo soy tu padre!" utiliza slilce para extraer la
