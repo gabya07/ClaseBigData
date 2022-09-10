@@ -9,7 +9,9 @@ val lista = List("rojo","blanco","negro","verde","amarillo","azul","naranja","pe
 lista slice (3,6)
 
 // 4. Crea un arreglo de numero en rango del 1-1000 en pasos de 5 en 5
+Array.range(0, 1000, 5)
 // 5. Cuales son los elementos unicos de la lista Lista(1,3,3,4,6,7,3,7) utilice conversion a conjuntos
+val s = Set(1,3,3,4,6,7,3,7)
 
 
 // 6. Crea una mapa mutable llamado nombres que contenga los siguiente
