@@ -64,10 +64,11 @@ balance(bl)
 balance(bl2)
 balance(bl3)
 
+//This function validates the word with the same word in a reverse way
+//And if is the same with the reverse it prints True
 def palindromo(palabra:String):Boolean ={
     return (palabra == palabra.reverse)
 }
-
 val palabra = "OSO"
 val palabra2 = "ANNA"
 val palabra3 = "JUAN"
@@ -75,3 +76,6 @@ val palabra3 = "JUAN"
 println(palindromo(palabra))
 println(palindromo(palabra2))
 println(palindromo(palabra3))
+//true
+//true
+//false
