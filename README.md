@@ -63,3 +63,31 @@ mutmap.keys
 // 7 b . Agrega el siguiente valor al mapa("Miguel", 23)
 mutmap += ("Miguel" -> 23)
 ```
+## Practice 2
+```sh
+
+
+
+
+// Exercise #2 
+//
+Explication: The "afortunado" function receives an integer type list and returns an integer data type
+the variable res = 0 is initialized, a cycle for will run the list, in the for a if it tells us that when in the list there is a number equal to 7 to the variable res(accumulator) 14 will be added, and otherwise with a else a res(accumulator) the number will be added within the list,  finally in the return we return the final result of res (accumulator).
+Finally we print the result of the "afortunado" function with the list "af", which gives us 29, the result of the sum 14 + 14 + 1 within the for.
+
+def afortunado(list:List[Int]): Int={
+    var res=0
+    for(n <- list){
+        if(n==7){
+            res = res + 14
+        }else{
+            res = res + n
+        }
+    }
+    return res
+}
+
+val af= List(1,7,7)
+println(afortunado(af))
+
+```
