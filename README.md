@@ -63,11 +63,8 @@ mutmap.keys
 // 7 b . Agrega el siguiente valor al mapa("Miguel", 23)
 mutmap += ("Miguel" -> 23)
 ```
-## Practice 2
+## Practice 3
 ```sh
-
-
-
 
 // Exercise #2 
 //

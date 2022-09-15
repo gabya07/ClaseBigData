@@ -1,9 +1,9 @@
- def isEven(num:Int): Boolean = {
-     return num%2 == 0
- }
-def isEven(num:Int): num%2 == 0
-    println(isEven(6))
-    println(isEven(3))
+ //def isEven(num:Int): Boolean = {
+    // return num%2 == 0
+// }
+//def isEven(num:Int): num%2 == 0
+  //  println(isEven(6))
+  //  println(isEven(3))
 //Practice 3, analyse the following code with your own words
 
 def isEven(num:Int): Boolean = {
@@ -50,6 +50,11 @@ def afortunado(list:List[Int]): Int={
 val af= List(1,7,7)
 println(afortunado(af))
 
+
+//This Function get a list and compare by itself;
+//First gets SEGUNDA as the sum of the same list (B1=6) and Primera as (0) on the FOR, 
+//PRIMERA is adding the list item and SEGUNDA is subtracting the list item, 
+//in each cases the final result is compared between and if is the same prints TRUE
 def balance(list:List[Int]): Boolean={
     var primera = 0
     var segunda = 0
@@ -74,6 +79,10 @@ val bl3 = List(10,30,90)
 balance(bl)
 balance(bl2)
 balance(bl3)
+//res5: Boolean = true
+//res6: Boolean = true
+//res7: Boolean = false
+
 
 //This function validates the word with the same word in a reverse way
 //And if is the same with the reverse it prints True
