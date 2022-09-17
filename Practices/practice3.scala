@@ -34,6 +34,9 @@ listEvens(l)                            //Se llama la funcion ListEvens previame
 listEvens(l2)                           ////Se llama la funcion ListEvens previamente creada con la list 12
 
 //3 7 afortunado
+//Explication: The "afortunado" function receives an integer type list and returns an integer data type
+//the variable res = 0 is initialized, a cycle for will run the list, in the for a if it tells us that when in the list there is a number equal to 7 to the variable res(accumulator) 14 will be added, and otherwise with a else a res(accumulator) the number will be added within the list,  finally in the return we return the final result of res (accumulator).
+//Finally we print the result of the "afortunado" function with the list "af", which gives us 29, the result of the sum 14 + 14 + 1 within the for.
 
 def afortunado(list:List[Int]): Int={
     var res=0
