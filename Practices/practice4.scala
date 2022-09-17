@@ -1,3 +1,25 @@
+// Exercise 1
+def fibonacci_algoritmo_1(n: Int): Int = {
+    if      (n < 2) n
+    else    fibonacci_algoritmo_1(n-1) + fibonacci_algoritmo_1(n-2)
+  }
+fibonacci_algoritmo_1(10)
+//55
+
+//Exercise 3
+def fibonacci_algoritmo_3(n: Int): Int = {
+    var a = 0
+    var b = 1
+    var c = 0
+    for (i <- 0 to n){
+      c = b + a
+      a = b
+      b = c
+    }
+    a
+  }
+fibonacci_algoritmo_3(10)
+//89
 
 
 //Exercise 5

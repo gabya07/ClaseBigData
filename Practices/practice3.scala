@@ -49,6 +49,7 @@ def afortunado(list:List[Int]): Int={
 
 val af= List(1,7,7)
 println(afortunado(af))
+//29
 
 
 //This Function get a list and compare by itself;
