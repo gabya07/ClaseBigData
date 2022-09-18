@@ -204,6 +204,20 @@ def fibonacci_algoritmo_3(n: Int): Int = {
 fibonacci_algoritmo_3(10)
 //89
 
+//Exercise 4
+def fib4(n: Int): Int = {
+    var a = 0
+    var b = 1
+    for (k <- 0 to n){
+      b = b + a
+      a = b - a
+      
+    }
+    return b
+  }
+fib4(15)
+//1597
+
 //Exercise 5
 def fib(n: Int): List[Int] = {
     var vector = scala.collection.mutable.ListBuffer[Int](0,1)
