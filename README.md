@@ -28,7 +28,9 @@ msn slice (5,9)
 ```
 
 ### What is the difference between value and a variable in scala? 
-#### The values ​​of "val" are immutable, unlike "var" where the values ​​change.
+```sh
+The values ​​of "val" are immutable, unlike "var" where the values ​​change.
+```
 
 ### Given the tuple (2,4,5,1,2,3,3.1416,23) returns the number 3.1416
 ```sh
@@ -36,31 +38,36 @@ val tup = (2,4,5,1,2,3,3.1416,23)
 tup._7
 ```
 ## Practice 2
+
+### Create a list called "list" with the elements "red", "white", "black"
+
 ```sh
-//Practice 2
-// 1. Crea una lista llamada "lista" con los elementos "rojo", "blanco", "negro"
 val lista = List("rojo","blanco","negro")
+```
+### Add 5 more items to "list" "green" ,"yellow", "blue", "orange", "pearl"
 
-// 2. Añadir 5 elementos mas a "lista" "verde" ,"amarillo", "azul", "naranja", "perla"
+```sh
 val lista = List("rojo","blanco","negro","verde","amarillo","azul","naranja","perla")
-
-// 3. Traer los elementos de "lista" "verde", "amarillo", "azul"
+```
+### Fetch items from "list" "green", "yellow", "blue"
+```sh
 lista slice (3,6)
-
-// 4. Crea un arreglo de numero en rango del 1-1000 en pasos de 5 en 5
+```
+### Create an array of numbers in the range 1-1000 in steps of 5 at a time
+```sh
 Array.range(0, 1000, 5)
-
-// 5. Cuales son los elementos unicos de la lista Lista(1,3,3,4,6,7,3,7) utilice conversion a conjuntos
+```
+### What are the unique elements of the list List(1,3,3,4,6,7,3,7) use conversion to sets
+```sh
 val s = Set(1,3,3,4,6,7,3,7)
+```
+### Create a mutable map named names containing the following "Jose", 20, "Luis", 24, "Ana", 23, "Susana", "27"
+#### Print all the keys on the map
+#### Add the following value to the map("Miguel", 23)
 
-// 6. Crea una mapa mutable llamado nombres que contenga los siguiente
-//     "Jose", 20, "Luis", 24, "Ana", 23, "Susana", "27"
+```sh
 val mutmap = collection.mutable.Map(("Jose", 20), ("Luis", 24), ("Ana", 23), ("Susana", 27))
-
-// 6 a . Imprime todas la llaves del mapa
 mutmap.keys
-
-// 7 b . Agrega el siguiente valor al mapa("Miguel", 23)
 mutmap += ("Miguel" -> 23)
 ```
 ## Practice 3
