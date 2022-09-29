@@ -1,18 +1,6 @@
 <<<<<<< HEAD
 # Clase Big Data.
 Gabriela Aguilar, Humberto Chavez y Ricardo Chavez
-=======
-# Clase Big Data
-**Teamwork: Gabriela Aguilar, Humberto Chavez y Ricardo Chavez**
-
-## Content
-- [Clase Big Data](#clase-big-data)
-  * [Practice 1](#practice-1)
-  * [Practice 2](#practice-2)
-  * [Practice 3](#practice-3)
-  * [Practice 4](#practice-4)
-  * [Practice 5](#practice-5)
->>>>>>> 13b8376cebf23ccbee29a9c8b1ea242e4c6c27e9
 
 ## Practice 1
 Develop an algorithm that calculates the **radius of a circle**
