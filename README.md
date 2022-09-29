@@ -79,28 +79,29 @@ mutmap.keys
 mutmap += ("Miguel" -> 23)
 ```
 ## Practice 3
+
+Exercise #1
+
+This function takes a list, **validates and prints if the numbers within the list are ODD or EVEN**, 
+at the very end it will print DONE
 ```sh
-//Exercise #1
-
-// This function takes a list, validates and prints if the numbers within the list are ODD or EVEN, 
-//at the very end it will print DONE
-
-def listEvens(list:List[Int]): String ={ // define a func listEvents type INT, it will return a STRING value
-    for(n <- list){                     // FOR loop to go through the list values 
-        if(n%2==0){                     // if condition to make sure a number divided by two will return 0 MOD%
-            println(s"$n is even")      // if number %2 is 0 it will print the number and the word  EVEN
-        }else{                          // si no es asi    
-            println(s"$n is odd")       //if number %2 is NOT 0 it will print the number and the word  ODD
+def listEvens(list:List[Int]): String ={ 
+    for(n <- list){                     
+        if(n%2==0){                     
+            println(s"$n is even")      
+        }else{                          
+            println(s"$n is odd")       
         }
     }
-    return "Done"                       // At the end of the list it will print the WORD DONE
+    return "Done"                       
 }
 
-val l = List(1,2,3,4,5,6,7,8)           //Creating a list (1) with values
-val l2 = List(4,3,22,55,7,8)            //Creating a list (12) with values
-listEvens(l)                            //call the func ListEvens that was created with param list(1)
-listEvens(l2)                           ////call the func ListEvens that was created with param list(12) 
-
+val l = List(1,2,3,4,5,6,7,8)           
+val l2 = List(4,3,22,55,7,8)            
+listEvens(l)                            
+listEvens(l2)                           
+```
+```sh
 # Run output
 l: List[Int] = List(1, 2, 3, 4, 5, 6, 7, 8)
 l2: List[Int] = List(4, 3, 22, 55, 7, 8)
@@ -120,7 +121,7 @@ res0: String = Done
 7 is odd
 8 is even
 res1: String = Done
-
+```
 
 // Exercise #2 
 //
