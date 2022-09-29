@@ -1,66 +1,86 @@
+<<<<<<< HEAD
 # Clase Big Data.
 Gabriela Aguilar, Humberto Chavez y Ricardo Chavez
+=======
+# Clase Big Data
+**Teamwork: Gabriela Aguilar, Humberto Chavez y Ricardo Chavez**
+
+## Content
+- [Clase Big Data](#clase-big-data)
+  * [Practice 1](#practice-1)
+  * [Practice 2](#practice-2)
+  * [Practice 3](#practice-3)
+  * [Practice 4](#practice-4)
+  * [Practice 5](#practice-5)
+>>>>>>> 13b8376cebf23ccbee29a9c8b1ea242e4c6c27e9
 
 ## Practice 1
+Develop an algorithm that calculates the **radius of a circle**
 ```sh
-//Desarrollar un algoritmo en scala que calcule el radio de un circulo
-
 val Diameter: Int = 20
 val Radio: Int = Diameter / 2
-
-//Desarrollar un algoritmo en scala que me diga si un numero es primo
+```
+Develop an algorithm that tells me if a number is **odd**
+```sh
 var num = 7
 if (num % 2 == 0) {
     printf("No es número primo")
 } else {
     printf("Si es número primo")
 }
-
-// Dada la variable bird = "tweet", utiliza interpolacion de string para
-    imprimir "Estoy ecribiendo un tweet"
-
+```
+Given the variable bird = "tweet", use string interpolation to print **"I'm writing a tweet"**
+```sh
 var Bird: String = "tweet"
 var PrintTweet = s"Estoy escribiendo un ${Bird}"
-
-//Dada la variable mensaje = "Hola Luke yo soy tu padre!" utiliza slilce para extraer la
-//   secuencia "Luke"
-
+```
+Given the message variable = "Hello Luke, I'm your father!" use slice to extract the sequence **"Luke"**
+```sh
 val msn = "Hola Luke yo soy tu padre!"
 msn slice (5,9)
+```
 
-//¿Cual es la diferencia entre value y una variable en scala?
-//Los valores de "val" son inmutables a diferencia de "var" que los valores van cambiando.
+What is the difference between **value** and a **variable** in scala? 
+```sh
+The values ​​of "val" are immutable, unlike "var" where the values ​​change.
+```
 
-//Dada la tupla (2,4,5,1,2,3,3.1416,23) regresa el numero 3.1416
+Given the tuple (2,4,5,1,2,3,3.1416,23) returns the number **3.1416**
+```sh
 val tup = (2,4,5,1,2,3,3.1416,23) 
 tup._7
 ```
 ## Practice 2
+
+Create a list called "list" with the elements **"red", "white", "black"**
+
 ```sh
-//Practice 2
-// 1. Crea una lista llamada "lista" con los elementos "rojo", "blanco", "negro"
 val lista = List("rojo","blanco","negro")
+```
+Add 5 more items to **"list" "green" ,"yellow", "blue", "orange", "pearl"**
 
-// 2. Añadir 5 elementos mas a "lista" "verde" ,"amarillo", "azul", "naranja", "perla"
+```sh
 val lista = List("rojo","blanco","negro","verde","amarillo","azul","naranja","perla")
-
-// 3. Traer los elementos de "lista" "verde", "amarillo", "azul"
+```
+Fetch items from "list" **"green", "yellow", "blue"**
+```sh
 lista slice (3,6)
-
-// 4. Crea un arreglo de numero en rango del 1-1000 en pasos de 5 en 5
+```
+Create an array of numbers in the range **1-1000** in steps of 5 at a time
+```sh
 Array.range(0, 1000, 5)
-
-// 5. Cuales son los elementos unicos de la lista Lista(1,3,3,4,6,7,3,7) utilice conversion a conjuntos
+```
+What are the unique elements of the list **List(1,3,3,4,6,7,3,7)** use conversion to sets
+```sh
 val s = Set(1,3,3,4,6,7,3,7)
+```
+Create a mutable map named names containing the following **"Jose", 20, "Luis", 24, "Ana", 23, "Susana", "27"**
+**Print all** the keys on the map
+Add the following value to the map **("Miguel", 23)**
 
-// 6. Crea una mapa mutable llamado nombres que contenga los siguiente
-//     "Jose", 20, "Luis", 24, "Ana", 23, "Susana", "27"
+```sh
 val mutmap = collection.mutable.Map(("Jose", 20), ("Luis", 24), ("Ana", 23), ("Susana", 27))
-
-// 6 a . Imprime todas la llaves del mapa
 mutmap.keys
-
-// 7 b . Agrega el siguiente valor al mapa("Miguel", 23)
 mutmap += ("Miguel" -> 23)
 ```
 ## Practice 3
@@ -232,7 +252,7 @@ fib(20)
 //List[Int] = List(0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987, 1597, 2584, 4181, 6765)
 ```
 
-## Practice 5   dataframe
+## Practice 5
 ```sh
 
 // 1 Adding a Column CarData CSV
