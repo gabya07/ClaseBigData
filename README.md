@@ -102,7 +102,7 @@ listEvens(l)
 listEvens(l2)                           
 ```
 ```sh
-# Run output
+Run output
 l: List[Int] = List(1, 2, 3, 4, 5, 6, 7, 8)
 l2: List[Int] = List(4, 3, 22, 55, 7, 8)
 1 is odd
@@ -124,11 +124,11 @@ res1: String = Done
 ```
 
 // Exercise #2 
-//
-Explication: The "afortunado" function receives an integer type list and returns an integer data type
-the variable res = 0 is initialized, a cycle for will run the list, in the for a if it tells us that when in the list there is a number equal to 7 to the variable res(accumulator) 14 will be added, and otherwise with a else a res(accumulator) the number will be added within the list,  finally in the return we return the final result of res (accumulator).
-Finally we print the result of the "afortunado" function with the list "af", which gives us 29, the result of the sum 14 + 14 + 1 within the for.
 
+Explication: The **"afortunado" function receives an integer type list and returns an integer data type**
+the variable res = 0 is initialized, a cycle for will run the list, in the for a if it tells us that when in the list there is a number equal to 7 to the variable res(accumulator) 14 will be added, and otherwise with a else a res(accumulator) the number will be added within the list,  finally in the return we return the final result of res (accumulator).
+**Finally we print the result of the "afortunado" function with the list "af", which gives us 29, the result of the sum 14 + 14 + 1 within the for.**
+```sh
 def afortunado(list:List[Int]): Int={
     var res=0
     for(n <- list){
@@ -143,8 +143,11 @@ def afortunado(list:List[Int]): Int={
 
 val af= List(1,7,7)
 println(afortunado(af))
-// 29
-
+```
+**Output**
+```sh
+ 29
+```
 Exercise #4
 //This Function get a list and compare by itself;
 //First gets SEGUNDA as the sum of the same list (B1=6) and Primera as (0) on the FOR, 
