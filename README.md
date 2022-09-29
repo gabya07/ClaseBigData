@@ -1,13 +1,27 @@
 # Clase Big Data
-Teamwork: Gabriela Aguilar, Humberto Chavez y Ricardo Chavez
+**Teamwork: Gabriela Aguilar, Humberto Chavez y Ricardo Chavez**
+```diff
+- text in red
++ text in green
+! text in orange
+# text in gray
+@@ text in purple (and bold)@@
+```
+## Content
+- [Clase Big Data](#clase-big-data)
+  * [Practice 1](#practice-1)
+  * [Practice 2](#practice-2)
+  * [Practice 3](#practice-3)
+  * [Practice 4](#practice-4)
+  * [Practice 5](#practice-5)
 
 ## Practice 1
-### Develop an algorithm that calculates the radius of a circle
+Develop an algorithm that calculates the **radius of a circle**
 ```sh
 val Diameter: Int = 20
 val Radio: Int = Diameter / 2
 ```
-### Develop an algorithm that tells me if a number is odd
+Develop an algorithm that tells me if a number is **odd**
 ```sh
 var num = 7
 if (num % 2 == 0) {
@@ -16,54 +30,54 @@ if (num % 2 == 0) {
     printf("Si es número primo")
 }
 ```
-### Given the variable bird = "tweet", use string interpolation to print "I'm writing a tweet"
+Given the variable bird = "tweet", use string interpolation to print **"I'm writing a tweet"**
 ```sh
 var Bird: String = "tweet"
 var PrintTweet = s"Estoy escribiendo un ${Bird}"
 ```
-### Given the message variable = "Hello Luke, I'm your father!" use slice to extract the sequence "Luke"
+Given the message variable = "Hello Luke, I'm your father!" use slice to extract the sequence **"Luke"**
 ```sh
 val msn = "Hola Luke yo soy tu padre!"
 msn slice (5,9)
 ```
 
-### What is the difference between value and a variable in scala? 
+What is the difference between **value** and a **variable** in scala? 
 ```sh
 The values ​​of "val" are immutable, unlike "var" where the values ​​change.
 ```
 
-### Given the tuple (2,4,5,1,2,3,3.1416,23) returns the number 3.1416
+Given the tuple (2,4,5,1,2,3,3.1416,23) returns the number **3.1416**
 ```sh
 val tup = (2,4,5,1,2,3,3.1416,23) 
 tup._7
 ```
 ## Practice 2
 
-### Create a list called "list" with the elements "red", "white", "black"
+Create a list called "list" with the elements **"red", "white", "black"**
 
 ```sh
 val lista = List("rojo","blanco","negro")
 ```
-### Add 5 more items to "list" "green" ,"yellow", "blue", "orange", "pearl"
+Add 5 more items to **"list" "green" ,"yellow", "blue", "orange", "pearl"**
 
 ```sh
 val lista = List("rojo","blanco","negro","verde","amarillo","azul","naranja","perla")
 ```
-### Fetch items from "list" "green", "yellow", "blue"
+Fetch items from "list" **"green", "yellow", "blue"**
 ```sh
 lista slice (3,6)
 ```
-### Create an array of numbers in the range 1-1000 in steps of 5 at a time
+Create an array of numbers in the range **1-1000** in steps of 5 at a time
 ```sh
 Array.range(0, 1000, 5)
 ```
-### What are the unique elements of the list List(1,3,3,4,6,7,3,7) use conversion to sets
+What are the unique elements of the list **List(1,3,3,4,6,7,3,7)** use conversion to sets
 ```sh
 val s = Set(1,3,3,4,6,7,3,7)
 ```
-### Create a mutable map named names containing the following "Jose", 20, "Luis", 24, "Ana", 23, "Susana", "27"
-#### Print all the keys on the map
-#### Add the following value to the map("Miguel", 23)
+Create a mutable map named names containing the following **"Jose", 20, "Luis", 24, "Ana", 23, "Susana", "27"**
+#### **Print all** the keys on the map
+#### Add the following value to the map **("Miguel", 23)**
 
 ```sh
 val mutmap = collection.mutable.Map(("Jose", 20), ("Luis", 24), ("Ana", 23), ("Susana", 27))
@@ -239,7 +253,7 @@ fib(20)
 //List[Int] = List(0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987, 1597, 2584, 4181, 6765)
 ```
 
-## Practice 5   dataframe
+## Practice 5
 ```sh
 
 // 1 Adding a Column CarData CSV
