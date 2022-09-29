@@ -1,4 +1,4 @@
-# Clase Big Data
+# Clase Big Data.
 Gabriela Aguilar, Humberto Chavez y Ricardo Chavez
 
 ## Practice 1
@@ -447,4 +447,47 @@ df.groupBy(df.col("Date")).agg(max("Volume")).show()
 |2008-09-15 00:00:00|   27020718|
 |2006-12-05 00:00:00|    1577940|
 +-------------------+-----------+
+```
+
+```sh
+//Gaby Starts//
+val spark = SparkSession.builder
+    .master("local[1]")
+    .appName("SparkByExamples.com")
+    .getOrCreate()
+
+val data = Seq(("James","Smith","USA","CA"),
+  ("Michael","Rose","USA","NY"),
+  ("Robert","Williams","USA","CA"),
+  ("Maria","Jones","USA","FL")
+  )
+val columns = Seq("firstname","lastname","country","state")
+import spark.implicits._
+val df = data.toDF(columns:_*)
+df.show(false)
+
+//11. Show all columns from DataFrame
+df.select("*").show()
+val columnsAll=df.columns.map(m=>col(m))
+df.select(columnsAll:_*).show()
+df.select(columns.map(m=>col(m)):_*).show()
+
+val listCols= List("lastname","country")
+df.select(listCols.map(m=>col(m)):_*).show()
+
+//12. Select first 2 columns.
+df.select(df.columns.slice(0,2).map(m=>col(m)):_*).show()
+
+//13. Show columns by regular expression
+  df.select(df.colRegex("`^.*name*`")).show()
+
+  df.select(df.columns.filter(f=>f.startsWith("first")).map(m=>col(m)):_*).show(3)
+  df.select(df.columns.filter(f=>f.endsWith("name")).map(m=>col(m)):_*).show(3)
+
+//14. Drop the column
+df.drop(df("state")).printSchema()
+
+//15. Rename column
+df.withColumnRenamed("state","estado").printSchema().show()
+
 ```
