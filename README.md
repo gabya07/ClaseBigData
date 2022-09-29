@@ -1,12 +1,6 @@
 # Clase Big Data
 **Teamwork: Gabriela Aguilar, Humberto Chavez y Ricardo Chavez**
-```diff
-- text in red
-+ text in green
-! text in orange
-# text in gray
-@@ text in purple (and bold)@@
-```
+
 ## Content
 - [Clase Big Data](#clase-big-data)
   * [Practice 1](#practice-1)
@@ -76,8 +70,8 @@ What are the unique elements of the list **List(1,3,3,4,6,7,3,7)** use conversio
 val s = Set(1,3,3,4,6,7,3,7)
 ```
 Create a mutable map named names containing the following **"Jose", 20, "Luis", 24, "Ana", 23, "Susana", "27"**
-#### **Print all** the keys on the map
-#### Add the following value to the map **("Miguel", 23)**
+**Print all** the keys on the map
+Add the following value to the map **("Miguel", 23)**
 
 ```sh
 val mutmap = collection.mutable.Map(("Jose", 20), ("Luis", 24), ("Ana", 23), ("Susana", 27))
