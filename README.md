@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-# Clase Big Data.
-Gabriela Aguilar, Humberto Chavez y Ricardo Chavez
-
 # Clase Big Data
 **Teamwork: Gabriela Aguilar, Humberto Chavez y Ricardo Chavez**
 
