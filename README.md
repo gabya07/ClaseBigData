@@ -80,8 +80,7 @@ mutmap += ("Miguel" -> 23)
 ```
 ## Practice 3
 
-Exercise #1
-
+Exercise
 This function takes a list, **validates and prints if the numbers within the list are ODD or EVEN**, 
 at the very end it will print DONE
 ```sh
@@ -123,9 +122,9 @@ res0: String = Done
 res1: String = Done
 ```
 
-// Exercise #2 
 
-Explication: The **"afortunado" function receives an integer type list and returns an integer data type**
+Excercise
+Description: The **"afortunado" function receives an integer type list and returns an integer data type**
 the variable res = 0 is initialized, a cycle for will run the list, in the for a if it tells us that when in the list there is a number equal to 7 to the variable res(accumulator) 14 will be added, and otherwise with a else a res(accumulator) the number will be added within the list,  finally in the return we return the final result of res (accumulator).
 **Finally we print the result of the "afortunado" function with the list "af", which gives us 29, the result of the sum 14 + 14 + 1 within the for.**
 ```sh
@@ -148,7 +147,7 @@ println(afortunado(af))
 ```sh
  29
 ```
-Exercise #4
+Exercise
 **This Function get a list and compare by itself;**
 First gets SEGUNDA as the sum of the same list (B1=6) and Primera as (0) on the FOR, 
 PRIMERA is adding the list item and SEGUNDA is subtracting the list item, 
@@ -186,7 +185,7 @@ res5: Boolean = true
 res6: Boolean = true
 res7: Boolean = false
 ```
-Exercise #5
+Exercise
 **This function validates the word with the same word in a reverse way**
 And if is the same with the reverse it prints **True**
 ```sh
@@ -210,7 +209,7 @@ false
 
 
 ## Practice 4
-**Exercise**
+Exercise
 ```sh
 def fibonacci_algoritmo_1(n: Int): Int = {
     if      (n < 2) n
@@ -223,7 +222,7 @@ fibonacci_algoritmo_1(10)
 ```sh
 55
 ```
-**Exercise 3**
+Exercise
 ```sh
 def fibonacci_algoritmo_3(n: Int): Int = {
     var a = 0
