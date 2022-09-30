@@ -210,16 +210,21 @@ false
 
 
 ## Practice 4
+**Exercise**
 ```sh
-// Exercise 1
 def fibonacci_algoritmo_1(n: Int): Int = {
     if      (n < 2) n
     else    fibonacci_algoritmo_1(n-1) + fibonacci_algoritmo_1(n-2)
   }
 fibonacci_algoritmo_1(10)
-//55
 
-//Exercise 3
+```
+**Output**
+```sh
+55
+```
+**Exercise 3**
+```sh
 def fibonacci_algoritmo_3(n: Int): Int = {
     var a = 0
     var b = 1
@@ -232,9 +237,13 @@ def fibonacci_algoritmo_3(n: Int): Int = {
     a
   }
 fibonacci_algoritmo_3(10)
-//89
-
-//Exercise 4
+```
+**output**
+```sh
+89
+```
+Exercise
+```sh
 def fib4(n: Int): Int = {
     var a = 0
     var b = 1
@@ -246,9 +255,13 @@ def fib4(n: Int): Int = {
     return b
   }
 fib4(15)
-//1597
-
-//Exercise 5
+```
+**Output**
+```sh
+1597
+```
+Exercise 
+```sh
 def fib(n: Int): List[Int] = {
     var vector = scala.collection.mutable.ListBuffer[Int](0,1)
     while (vector.length < n+1) {
@@ -259,7 +272,10 @@ def fib(n: Int): List[Int] = {
     return vector.toList
   }
 fib(20)
-//List[Int] = List(0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987, 1597, 2584, 4181, 6765)
+```
+**Output**
+```sh
+List[Int] = List(0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987, 1597, 2584, 4181, 6765)
 ```
 
 ## Practice 5
