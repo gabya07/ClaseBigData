@@ -279,22 +279,28 @@ List[Int] = List(0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 98
 ```
 
 ## Practice 5
+
+
+**Adding a Column CarData CSV**
+**withcolumn** adds a new column to existing dataframe with its value 
 ```sh
-
-// 1 Adding a Column CarData CSV
-//withcolumn adds a new column to existing dataframe with its value 
-// val df = spark.read.option("header", "true").option("inferSchema","true")csv("CarData")
-
+val df = spark.read.option("header", "true").option("inferSchema","true")csv("CarData")
 df.withColumn("Seats", lit(7)).show(1)
-// +---------+----+---+-----+---+----+----+-----+---+---+----+----+-----+
+```
+**Output**
+```sh
+ +---------+----+---+-----+---+----+----+-----+---+---+----+----+-----+
 |Car_Model| mpg|cyl| disp| hp|drat|  wt| qsec| vs| am|gear|carb|Seats|
 +---------+----+---+-----+---+----+----+-----+---+---+----+----+-----+
 |Mazda RX4|21.0|  6|160.0|110| 3.9|2.62|16.46|  0|  1|   4|   4|    7|
 +---------+----+---+-----+---+----+----+-----+---+---+----+----+-----+
-
-// 2 Using select and summary to pull  data from specific columns un the dataframe 
-
+```
+**Using select and summary to pull  data from specific columns un the dataframe**
+```sh
 df.select("Car_model", "Cyl").summary("min","max", "count").show()
+```
+**Output**
+```sh
 +-------+-----------+---+
 |summary|  Car_model|Cyl|
 +-------+-----------+---+
@@ -302,24 +308,33 @@ df.select("Car_model", "Cyl").summary("min","max", "count").show()
 |    max| Volvo 142E|  8|
 |  count|         32| 32|
 +-------+-----------+---+
+```
 
-
-//3 Drop   using drop to delete single  and multiple columns from the DATAFRAME
+**Drop**   using drop to delete single  and multiple columns from the DATAFRAME
+```sh
 df.drop("Car_Model", "wt", "mpg").show(1)
+```
+**Output**
+```sh
 +----+---+-----+---+----+----+-----+---+---+----+----+
 | mpg|cyl| disp| hp|drat|  wt| qsec| vs| am|gear|carb|
 +----+---+-----+---+----+----+-----+---+---+----+----+
 |21.0|  6|160.0|110| 3.9|2.62|16.46|  0|  1|   4|   4|
 +----+---+-----+---+----+----+-----+---+---+----+----+
-
+```
+```sh
 df.drop("Car_Model", "wt", "mpg").show(1)
 +---+-----+---+----+-----+---+---+----+----+
 |cyl| disp| hp|drat| qsec| vs| am|gear|carb|
 +---+-----+---+----+-----+---+---+----+----+
 |  6|160.0|110| 3.9|16.46|  0|  1|   4|   4|
 +---+-----+---+----+-----+---+---+----+----+
+```
 
-//4 Using Fill and FILL NA to fill null / empty valus in a dataframe
+
+Using **Fill** and FILL NA to fill null / empty valus in a dataframe
+Current DF status
+```sh
 +---+-------+--------+-------------------+-----+----------+
 | id|zipcode|    type|               city|state|population|
 +---+-------+--------+-------------------+-----+----------+
@@ -329,8 +344,14 @@ df.drop("Car_Model", "wt", "mpg").show(1)
 |  4|  76166|  UNIQUE|  CINGULAR WIRELESS|   TX|     84000|
 |  5|  76177|STANDARD|               null|   TX|      null|
 +---+-------+--------+-------------------+-----+----------+
+```
+this will fill any null INT  with a any INT value we enter, in this case 0
+```sh
+df.na.fill(value=0).show()  
+```
 
-df.na.fill(value=0).show()  #this will fill any null INT  with a any INT value we enter, in this case 0.
+**Output**
+```sh
 +---+-------+--------+-------------------+-----+----------+
 | id|zipcode|    type|               city|state|population|
 +---+-------+--------+-------------------+-----+----------+
@@ -340,7 +361,14 @@ df.na.fill(value=0).show()  #this will fill any null INT  with a any INT value w
 |  4|  76166|  UNIQUE|  CINGULAR WIRELESS|   TX|     84000|
 |  5|  76177|STANDARD|               null|   TX|         0|
 +---+-------+--------+-------------------+-----+----------+
-df.na.fill(value="PRACTICA-BIGDATA").show() #This will fill any null string with the given value#
+```
+
+This will fill any null string with the given value
+```sh
+df.na.fill(value="PRACTICA-BIGDATA").show() 
+```
+**Output**
+```sh
 
 +---+-------+----------------+-------------------+-----+----------+
 | id|zipcode|            type|               city|state|population|
@@ -351,11 +379,15 @@ df.na.fill(value="PRACTICA-BIGDATA").show() #This will fill any null string with
 |  4|  76166|          UNIQUE|  CINGULAR WIRELESS|   TX|     84000|
 |  5|  76177|        STANDARD|   PRACTICA-BIGDATA|   TX|      null|
 +---+-------+----------------+-------------------+-----+----------+.
+```
 
-
-// 6.-From the "CitiGroup2006_2008" table, we calculate the maximum number of High and the minimum number of Low grouped by Volume.
-
+From the "CitiGroup2006_2008" table, we **calculate the maximum number of High and the minimum number of Low grouped by Volume.**
+```sh
 df.groupBy($"Volume").agg(Map("High" -> "max","Low" -> "min")).show()
+```
+
+**Output**
+```sh
 +--------+---------+--------+
 |  Volume|max(High)|min(Low)|
 +--------+---------+--------+
@@ -380,10 +412,13 @@ df.groupBy($"Volume").agg(Map("High" -> "max","Low" -> "min")).show()
 | 3472498|    470.2|   460.1|
 |  979570|    480.2|   475.3|
 +--------+---------+--------+
-
-//7.- From the "CitiGroup2006_2008" table, we calculate average of Open and the average of Close grouped by Date.
-
+```
+ias  From the "CitiGroup2006_2008" table, we calculate average of Open and the average of Close grouped by Date.
+```sh
 df.groupBy($"Date").agg(Map("Open" -> "avg","Close" -> "avg")).show()
+```
+**Output**
+```sh
 +-------------------+---------+----------+
 |               Date|avg(Open)|avg(Close)|
 +-------------------+---------+----------+
@@ -408,11 +443,15 @@ df.groupBy($"Date").agg(Map("Open" -> "avg","Close" -> "avg")).show()
 |2008-09-15 00:00:00|    163.9|     152.4|
 |2006-12-05 00:00:00|    498.9|     505.1|
 +-------------------+---------+----------+
+```
 
-
-//8.- Compute the average for all numeric columns rolled up by Date.
+ Compute the **average for all numeric columns** rolled up by Date.
+ ```sh
 
 df.rollup("Date").avg().show()
+```
+**Output**
+```sh
 +-------------------+---------+---------+--------+----------+-----------+
 |               Date|avg(Open)|avg(High)|avg(Low)|avg(Close)|avg(Volume)|
 +-------------------+---------+---------+--------+----------+-----------+
@@ -437,10 +476,15 @@ df.rollup("Date").avg().show()
 |2007-09-26 00:00:00|    463.6|    470.2|   460.1|     465.5|  3472498.0|
 |2008-04-07 00:00:00|    248.5|    251.9|   243.9|     246.0|  8928018.0|
 +-------------------+---------+---------+--------+----------+-----------+
+```
 
-// 9. We order the table "CitiGroup2006_2008" sorted by Open descending and Close ascending
-
+ We order the table "CitiGroup2006_2008" sorted by Open **descending and Close ascending**
+```sh
 df.sort($"Open".desc, $"Close".asc).show()
+```
+
+**Output**
+```sh
 +-------------------+-----+-----+-----+-----+-------+
 |               Date| Open| High|  Low|Close| Volume|
 +-------------------+-----+-----+-----+-----+-------+
@@ -465,10 +509,15 @@ df.sort($"Open".desc, $"Close".asc).show()
 |2007-05-18 00:00:00|550.0|555.5|547.4|550.0|2102519|
 |2006-12-22 00:00:00|549.5|551.0|544.6|545.5| 964770|
 +-------------------+-----+-----+-----+-----+-------+
+```
 
-//10.-From the "CitiGroup2006_2008" table, we calculate the maximum number of Volume grouped by Date 
+From the "CitiGroup2006_2008" table, we calculate the **maximum number of Volume** grouped by Date 
+```sh
 
 df.groupBy(df.col("Date")).agg(max("Volume")).show()
+```
+**Output**
+```sh
 +-------------------+-----------+
 |               Date|max(Volume)|
 +-------------------+-----------+
@@ -495,8 +544,9 @@ df.groupBy(df.col("Date")).agg(max("Volume")).show()
 +-------------------+-----------+
 ```
 
+We create a new data frame with data in. From the new DF, the following queries were executed.
+
 ```sh
-//Gaby Starts//
 val spark = SparkSession.builder
     .master("local[1]")
     .appName("SparkByExamples.com")
@@ -511,8 +561,11 @@ val columns = Seq("firstname","lastname","country","state")
 import spark.implicits._
 val df = data.toDF(columns:_*)
 df.show(false)
+```
 
-//11. Show all columns from DataFrame
+
+Show all columns from DataFrame
+```sh
 df.select("*").show()
 val columnsAll=df.columns.map(m=>col(m))
 df.select(columnsAll:_*).show()
@@ -520,20 +573,30 @@ df.select(columns.map(m=>col(m)):_*).show()
 
 val listCols= List("lastname","country")
 df.select(listCols.map(m=>col(m)):_*).show()
+```
 
-//12. Select first 2 columns.
+Select first 2 columns.
+```sh
 df.select(df.columns.slice(0,2).map(m=>col(m)):_*).show()
+```
 
-//13. Show columns by regular expression
+ Show columns by regular expression
+ ```sh
   df.select(df.colRegex("`^.*name*`")).show()
+
 
   df.select(df.columns.filter(f=>f.startsWith("first")).map(m=>col(m)):_*).show(3)
   df.select(df.columns.filter(f=>f.endsWith("name")).map(m=>col(m)):_*).show(3)
+  ```
 
-//14. Drop the column
+
+Drop the column
+```sh
 df.drop(df("state")).printSchema()
+```
 
-//15. Rename column
+Rename column
+```sh
 df.withColumnRenamed("state","estado").printSchema().show()
 
 ```
