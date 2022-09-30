@@ -149,10 +149,11 @@ println(afortunado(af))
  29
 ```
 Exercise #4
-//This Function get a list and compare by itself;
-//First gets SEGUNDA as the sum of the same list (B1=6) and Primera as (0) on the FOR, 
-//PRIMERA is adding the list item and SEGUNDA is subtracting the list item, 
-//in each cases the final result is compared between and if is the same prints TRUE
+**This Function get a list and compare by itself;**
+First gets SEGUNDA as the sum of the same list (B1=6) and Primera as (0) on the FOR, 
+PRIMERA is adding the list item and SEGUNDA is subtracting the list item, 
+in each cases the final result is compared between and if is the same prints TRUE
+```sh
 def balance(list:List[Int]): Boolean={
     var primera = 0
     var segunda = 0
@@ -169,7 +170,7 @@ def balance(list:List[Int]): Boolean={
     }
     return false 
 }
-
+```
 val bl = List(3,2,1)
 val bl2 = List(2,3,3,2)
 val bl3 = List(10,30,90)
@@ -177,13 +178,16 @@ val bl3 = List(10,30,90)
 balance(bl)
 balance(bl2)
 balance(bl3)
-//res5: Boolean = true
-//res6: Boolean = true
-//res7: Boolean = false
-
+**Output**
+```sh
+res5: Boolean = true
+res6: Boolean = true
+res7: Boolean = false
+```
 Exercise #5
-//This function validates the word with the same word in a reverse way
-//And if is the same with the reverse it prints True
+**This function validates the word with the same word in a reverse way**
+And if is the same with the reverse it prints **True**
+```sh
 def palindromo(palabra:String):Boolean ={
     return (palabra == palabra.reverse)
 }
@@ -194,10 +198,15 @@ val palabra3 = "JUAN"
 println(palindromo(palabra))
 println(palindromo(palabra2))
 println(palindromo(palabra3))
-//true
-//true
-//false............./////
 ```
+**Output**
+```sh
+true
+true
+false
+```
+
+
 ## Practice 4
 ```sh
 // Exercise 1
