@@ -8,6 +8,7 @@
   * [Practice 3](#practice-3)
   * [Practice 4](#practice-4)
   * [Practice 5](#practice-5)
+  * [Evaluation Practice](#EvaluationPractice-1)
 
 ## Practice 1
 Develop an algorithm that calculates the **radius of a circle**
