@@ -748,10 +748,13 @@ df.describe().show()
 7.  Crea un nuevo dataframe con una columna nueva llamada “HV Ratio” que es la  relación que existe entre el precio de la columna “High” frente a la columna  “Volumen” de acciones negociadas por un día. Hint - es una operación 
 
 ```sh
-
+val df2 = df.withColumn("HV Ratio",df("High")/df("Volume"))
+df2.columns
 ```
 **Output**
 ```sh
+df2: org.apache.spark.sql.DataFrame = [Date: timestamp, Open: double ... 6 more fields]
+res23: Array[String] = Array(Date, Open, High, Low, Close, Volume, Adj Close, HV Ratio)
 ```
 
 8. ¿Qué día tuvo el pico más alto en la columna “Open”?
@@ -801,10 +804,12 @@ df.select(max("Volume")).show()
 a). ¿Cuántos días fue la columna “Close” inferior a $ 600? 
 
 ```sh
+df.filter($"Close"<600).count()
 
 ```
 **Output**
 ```sh
+res25: Long = 1218
 ```
 
 b). ¿Qué porcentaje del tiempo fue la columna “High” mayor que $ 500? 
@@ -820,19 +825,36 @@ Double = 4.924543288324067
 c). ¿Cuál es la correlación de Pearson entre columna “High” y la columna  “Volumen”? 
 
 ```sh
-
+ df.select(corr("High","Volume")).show()
 ```
 **Output**
 ```sh
++--------------------+
+|  corr(High, Volume)|
++--------------------+
+|-0.20960233287942157|
++--------------------+
 ```
 
 d). ¿Cuál es el máximo de la columna “High” por año?
 
 ```sh
-
+val df3 = df.withColumn("Year", year(df("Date")))
+val dfprom = df3.groupBy("Year").max()
+dfprom.select($"Year", $"max(High)").show()
 ```
 **Output**
 ```sh
++----+------------------+
+|Year|         max(High)|
++----+------------------+
+|2015|        716.159996|
+|2013|        389.159988|
+|2014|        489.290024|
+|2012|        133.429996|
+|2016|129.28999299999998|
+|2011|120.28000300000001|
++----+------------------+
 ```
 
 e). ¿Cuál es el promedio de la columna “Close” para cada mes del calendario?
