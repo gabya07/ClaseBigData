@@ -652,10 +652,13 @@ df.withColumnRenamed("state","estado").printSchema().show()
 
 1. Comienza una simple sesión Spark. 
 ```sh
-
+cd Evaluationpractice
+spark-shell
+//:load evaluation1.scala
 ```
 **Output**
 ```sh
+Spark-shell
 ```
 
 2. Cargue el archivo Netflix Stock CSV en dataframe llamado df, haga que Spark  infiera los tipos de datos. 
@@ -679,10 +682,18 @@ df.withColumnRenamed("state","estado").printSchema().show()
 4. ¿Cómo es el esquema?
 
 ```sh
-
+df.printSchema()
 ```
 **Output**
 ```sh
+root
+ |-- Date: timestamp (nullable = true)
+ |-- Open: double (nullable = true)
+ |-- High: double (nullable = true)
+ |-- Low: double (nullable = true)
+ |-- Close: double (nullable = true)
+ |-- Volume: integer (nullable = true)
+ |-- Adj Close: double (nullable = true)
 ```
 
 5. Imprime las primeras 5 renglones. 
@@ -692,6 +703,7 @@ df.withColumnRenamed("state","estado").printSchema().show()
 ```
 **Output**
 ```sh
+
 ```
 
 6. Usa el método describe () para aprender sobre el DataFrame. 
@@ -715,19 +727,21 @@ df.withColumnRenamed("state","estado").printSchema().show()
 8. ¿Qué día tuvo el pico más alto en la columna “Open”?
 
 ```sh
-
+df.select(max("Open")).show()
 ```
 **Output**
 ```sh
++----------+
+| max(Open)|
++----------+
+|708.900017|
++----------+
 ```
 
 9. ¿Cuál es el significado de la columna Cerrar “Close” en el contexto de información  financiera, explíquelo no hay que codificar nada? 
 
 ```sh
-
-```
-**Output**
-```sh
+La columna close indica el valor en el que Cierra ese dia
 ```
 
 10. ¿Cuál es el máximo y mínimo de la columna “Volumen”? 
@@ -753,10 +767,11 @@ a). ¿Cuántos días fue la columna “Close” inferior a $ 600?
 b). ¿Qué porcentaje del tiempo fue la columna “High” mayor que $ 500? 
 
 ```sh
-
+(df.filter($"High">500).count()*100.00)/df.count()
 ```
 **Output**
 ```sh
+Double = 4.924543288324067
 ```
 
 c). ¿Cuál es la correlación de Pearson entre columna “High” y la columna  “Volumen”? 
@@ -786,5 +801,68 @@ val dfavgs = df5.groupBy("M/Y").mean().sort("M/Y").show(72)
 ```
 **Output**
 ```sh
++-------+------------------+
+|2011-10| 87.11500133333334|
+|2011-11| 79.76380923809522|
+|2011-12| 70.30428566666667|
+| 2012-1| 97.75149895000001|
+|2012-10| 65.78095142857143|
+|2012-11| 80.04190514285713|
+|2012-12| 89.40500014999998|
+| 2012-2|119.92049895000002|
+| 2012-3|113.00181809090908|
+| 2012-4|100.88399985000001|
+| 2012-5| 72.98772681818181|
+| 2012-6| 65.75380899999999|
+| 2012-7|  75.2542851904762|
+| 2012-8|60.736521347826084|
+| 2012-9| 56.57736921052631|
+| 2013-1|117.01380985714289|
+|2013-10| 321.7186945217391|
+|2013-11|      342.68350005|
+|2013-12|368.05095304761903|
+| 2013-2|182.45684194736842|
+| 2013-3|       184.6934989|
+| 2013-4|182.83045363636364|
+| 2013-5|223.71999777272728|
+| 2013-6|218.92799680000002|
+| 2013-7|246.11908731818184|
+| 2013-8|264.21408818181817|
+| 2013-9|      303.47000175|
+| 2014-1| 359.1285730952381|
+|2014-10| 412.4830449565217|
+|2014-11| 373.4242098421052|
+|2014-12|339.59772645454535|
+| 2014-2| 431.4189474210526|
+| 2014-3| 414.8538118571429|
+| 2014-4|340.62333161904763|
+| 2014-5| 362.4299989523809|
+| 2014-6|433.30476138095236|
+| 2014-7|       442.4186355|
+| 2014-8| 457.2204742380952|
+| 2014-9| 462.8152389523809|
+| 2015-1|373.86549944999996|
+|2015-10|105.58772759090908|
+|2015-11|116.06949959999997|
+|2015-12|121.29636322727274|
+| 2015-2| 462.9221038421052|
+| 2015-3|437.66090550000007|
+| 2015-4| 505.8238118095239|
+| 2015-5| 596.3994980499999|
+| 2015-6| 652.4349957727273|
+| 2015-7|339.94727122727267|
+| 2015-8|117.50285638095235|
+| 2015-9|100.56571519047618|
+| 2016-1|105.44789489473683|
+|2016-10|    109.0562500625|
+| 2016-2| 89.96950000000001|
+| 2016-3| 99.31590927272727|
+| 2016-4|100.81190457142858|
+| 2016-5| 93.17476147619047|
+| 2016-6| 94.29863663636364|
+| 2016-7| 93.16349985000002|
+| 2016-8| 95.62260904347829|
+| 2016-9| 97.44857128571428|
++-------+------------------+
 
 ```
