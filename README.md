@@ -780,8 +780,11 @@ d). ¿Cuál es el máximo de la columna “High” por año?
 e). ¿Cuál es el promedio de la columna “Close” para cada mes del calendario?
 
 ```sh
-
+val df4 = df.withColumn("Year", year(df("Date"))).withColumn("Month", month(df("Date")))
+val df5 = df4.select(concat($"Year", lit("-"), $"Month").as("M/Y"),$"Close")
+val dfavgs = df5.groupBy("M/Y").mean().sort("M/Y").show(72)
 ```
 **Output**
 ```sh
+
 ```
