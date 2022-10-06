@@ -15,6 +15,10 @@ Develop an algorithm that calculates the **radius of a circle**
 val Diameter: Int = 20
 val Radio: Int = Diameter / 2
 ```
+**Output**
+```sh
+Radio: Int = 10
+```
 Develop an algorithm that tells me if a number is **odd**
 ```sh
 var num = 7
@@ -24,15 +28,27 @@ if (num % 2 == 0) {
     printf("Si es número primo")
 }
 ```
+**Output**
+```sh
+Si es numero primo
+```
 Given the variable bird = "tweet", use string interpolation to print **"I'm writing a tweet"**
 ```sh
 var Bird: String = "tweet"
 var PrintTweet = s"Estoy escribiendo un ${Bird}"
 ```
+**Output**
+```sh
+PrintTweet: String = Estoy escribiendo un tweet
+```
 Given the message variable = "Hello Luke, I'm your father!" use slice to extract the sequence **"Luke"**
 ```sh
 val msn = "Hola Luke yo soy tu padre!"
 msn slice (5,9)
+```
+**Output**
+```sh
+res1: String = Luke
 ```
 
 What is the difference between **value** and a **variable** in scala? 
@@ -45,6 +61,10 @@ Given the tuple (2,4,5,1,2,3,3.1416,23) returns the number **3.1416**
 val tup = (2,4,5,1,2,3,3.1416,23) 
 tup._7
 ```
+**Output**
+```sh
+res2: Double = 3.1416
+```
 ## Practice 2
 
 Create a list called "list" with the elements **"red", "white", "black"**
@@ -52,22 +72,43 @@ Create a list called "list" with the elements **"red", "white", "black"**
 ```sh
 val lista = List("rojo","blanco","negro")
 ```
+**Output**
+```sh
+lista: List[String] = List(rojo, blanco, negro)
+```
 Add 5 more items to **"list" "green" ,"yellow", "blue", "orange", "pearl"**
 
 ```sh
 val lista = List("rojo","blanco","negro","verde","amarillo","azul","naranja","perla")
 ```
+**Output**
+```sh
+lista: List[String] = List(rojo, blanco, negro, verde, amarillo, azul, naranja, perla)
+```
 Fetch items from "list" **"green", "yellow", "blue"**
 ```sh
 lista slice (3,6)
+```
+**Output**
+```sh
+res3: List[String] = List(verde, amarillo, azul)
 ```
 Create an array of numbers in the range **1-1000** in steps of 5 at a time
 ```sh
 Array.range(0, 1000, 5)
 ```
+**Output**
+```sh
+res4: Array[Int] = Array(0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100, 105, 110, 115, 120, 125, 130, 135, 140, 145, 150, 155, 160, 165, 170, 175, 180, 185, 190, 195, 200, 205, 210, 215, 220, 225, 230, 235, 240, 245, 250, 255, 260, 265, 270, 275, 280, 285, 290, 295, 300, 305, 310, 315, 320, 325, 330, 335, 340, 345, 350, 355, 360, 365, 370, 375, 380, 385, 390, 395, 400, 405, 410, 415, 420, 425, 430, 435, 440, 445, 450, 455, 460, 465, 470, 475, 480, 485, 490, 495, 500, 505, 510, 515, 520, 525, 530, 535, 540, 545, 550, 555, 560, 565, 570, 575, 580, 585, 590, 595, 600, 605, 610, 615, 620, 625, 630, 635, 640, 645, 650, 655, 660, 665, 670, 675, 680, 685, 690, 695, 700, 
+705, 710, 715, 720, 725, 730, 735, 740, 745, 750, 755, 760, 765, 770, 775, 780, 785, 790,...
+```
 What are the unique elements of the list **List(1,3,3,4,6,7,3,7)** use conversion to sets
 ```sh
 val s = Set(1,3,3,4,6,7,3,7)
+```
+**Output**
+```sh
+s: scala.collection.immutable.Set[Int] = Set(1, 6, 7, 3, 4)
 ```
 Create a mutable map named names containing the following **"Jose", 20, "Luis", 24, "Ana", 23, "Susana", "27"**
 **Print all** the keys on the map
@@ -77,6 +118,10 @@ Add the following value to the map **("Miguel", 23)**
 val mutmap = collection.mutable.Map(("Jose", 20), ("Luis", 24), ("Ana", 23), ("Susana", 27))
 mutmap.keys
 mutmap += ("Miguel" -> 23)
+```
+**Output**
+```sh
+res6: mutmap.type = Map(Susana -> 27, Ana -> 23, Miguel -> 23, Luis -> 24, Jose -> 20)
 ```
 ## Practice 3
 
@@ -100,6 +145,7 @@ val l2 = List(4,3,22,55,7,8)
 listEvens(l)                            
 listEvens(l2)                           
 ```
+**Output**
 ```sh
 Run output
 l: List[Int] = List(1, 2, 3, 4, 5, 6, 7, 8)
@@ -121,7 +167,6 @@ res0: String = Done
 8 is even
 res1: String = Done
 ```
-
 
 Excercise
 Description: The **"afortunado" function receives an integer type list and returns an integer data type**
