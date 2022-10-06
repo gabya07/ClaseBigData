@@ -644,3 +644,144 @@ Rename column
 df.withColumnRenamed("state","estado").printSchema().show()
 
 ```
+
+## Evaluation Practice
+
+**Instrucciones**
+**Responder las siguientes preguntas con Spark DataFrames y Scala utilizando el “CSV” Netflix_2011_2016.csv que se encuentra en la carpeta de spark-dataframes.**
+
+1. Comienza una simple sesión Spark. 
+```sh
+
+```
+**Output**
+```sh
+```
+
+2. Cargue el archivo Netflix Stock CSV en dataframe llamado df, haga que Spark  infiera los tipos de datos. 
+
+```sh
+
+```
+**Output**
+```sh
+```
+
+3. ¿Cuáles son los nombres de las columnas? 
+
+```sh
+
+```
+**Output**
+```sh
+```
+
+4. ¿Cómo es el esquema?
+
+```sh
+
+```
+**Output**
+```sh
+```
+
+5. Imprime las primeras 5 renglones. 
+
+```sh
+
+```
+**Output**
+```sh
+```
+
+6. Usa el método describe () para aprender sobre el DataFrame. 
+
+```sh
+
+```
+**Output**
+```sh
+```
+
+7.  Crea un nuevo dataframe con una columna nueva llamada “HV Ratio” que es la  relación que existe entre el precio de la columna “High” frente a la columna  “Volumen” de acciones negociadas por un día. Hint - es una operación 
+
+```sh
+
+```
+**Output**
+```sh
+```
+
+8. ¿Qué día tuvo el pico más alto en la columna “Open”?
+
+```sh
+
+```
+**Output**
+```sh
+```
+
+9. ¿Cuál es el significado de la columna Cerrar “Close” en el contexto de información  financiera, explíquelo no hay que codificar nada? 
+
+```sh
+
+```
+**Output**
+```sh
+```
+
+10. ¿Cuál es el máximo y mínimo de la columna “Volumen”? 
+
+```sh
+
+```
+**Output**
+```sh
+```
+
+11. Con Sintaxis Scala/Spark $ conteste lo siguiente: 
+
+a). ¿Cuántos días fue la columna “Close” inferior a $ 600? 
+
+```sh
+
+```
+**Output**
+```sh
+```
+
+b). ¿Qué porcentaje del tiempo fue la columna “High” mayor que $ 500? 
+
+```sh
+
+```
+**Output**
+```sh
+```
+
+c). ¿Cuál es la correlación de Pearson entre columna “High” y la columna  “Volumen”? 
+
+```sh
+
+```
+**Output**
+```sh
+```
+
+d). ¿Cuál es el máximo de la columna “High” por año?
+
+```sh
+
+```
+**Output**
+```sh
+```
+
+e). ¿Cuál es el promedio de la columna “Close” para cada mes del calendario?
+
+```sh
+
+```
+**Output**
+```sh
+```
