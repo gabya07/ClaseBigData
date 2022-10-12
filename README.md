@@ -748,13 +748,23 @@ df.describe().show()
 7.  Crea un nuevo dataframe con una columna nueva llamada “HV Ratio” que es la  relación que existe entre el precio de la columna “High” frente a la columna  “Volumen” de acciones negociadas por un día. Hint - es una operación 
 
 ```sh
-val df2 = df.withColumn("HV Ratio",df("High")/df("Volume"))
-df2.columns
+val df2 = df.withColumn("HV Ratio",df("Volume")/df("High"))
+df2.show(5)
 ```
 **Output**
 ```sh
 df2: org.apache.spark.sql.DataFrame = [Date: timestamp, Open: double ... 6 more fields]
 res23: Array[String] = Array(Date, Open, High, Low, Close, Volume, Adj Close, HV Ratio)
+
++-------------------+----------+------------------+----------+-----------------+---------+------------------+------------------+
+|               Date|      Open|              High|       Low|            Close|   Volume|         Adj Close|          HV Ratio|
++-------------------+----------+------------------+----------+-----------------+---------+------------------+------------------+
+|2011-10-24 00:00:00|119.100002|120.28000300000001|115.100004|       118.839996|120460200|         16.977142|1001498.1459553172|
+|2011-10-25 00:00:00| 74.899999|         79.390001| 74.249997|        77.370002|315541800|11.052857000000001|3974578.6122360677|
+|2011-10-26 00:00:00|     78.73|         81.420001| 75.399997|        79.400002|148733900|         11.342857|1826748.9335943388|
+|2011-10-27 00:00:00| 82.179998| 82.71999699999999| 79.249998|80.86000200000001| 71190000|11.551428999999999| 860614.1511344592|
+|2011-10-28 00:00:00| 80.280002|         84.660002| 79.599999|84.14000300000001| 57769600|             12.02| 682371.8241820972|
++-------------------+----------+------------------+----------+-----------------+---------+------------------+------------------+
 ```
 
 8. ¿Qué día tuvo el pico más alto en la columna “Open”?
