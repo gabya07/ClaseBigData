@@ -770,15 +770,15 @@ res23: Array[String] = Array(Date, Open, High, Low, Close, Volume, Adj Close, HV
 8. ¿Qué día tuvo el pico más alto en la columna “Open”?
 
 ```sh
-df.select(max("Open")).show()
+df.orderBy($"Open".desc).show(1)
 ```
 **Output**
 ```sh
-+----------+
-| max(Open)|
-+----------+
-|708.900017|
-+----------+
++-------------------+----------+----------+----------+----------+--------+----------+
+|               Date|      Open|      High|       Low|     Close|  Volume| Adj Close|
++-------------------+----------+----------+----------+----------+--------+----------+
+|2015-07-14 00:00:00|708.900017|711.449982|697.569984|702.600006|19736500|100.371429|
++-------------------+----------+----------+----------+----------+--------+----------+
 ```
 
 9. ¿Cuál es el significado de la columna Cerrar “Close” en el contexto de información  financiera, explíquelo no hay que codificar nada? 
