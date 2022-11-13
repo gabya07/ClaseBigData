@@ -311,8 +311,53 @@ We verify the accuracy margin resulting in 98% accuracy
 metrics.accuracy 
 res5: Double = 0.9825783972125436
 ```
-
 ## Practice 3 Random forest classifier
+Importamos librerias
+```sh
+import org.apache.spark.ml.Pipeline
+import org.apache.spark.ml.classification.LogisticRegression
+import org.apache.spark.sql.SparkSession
+import org.apache.spark.ml.classification.DecisionTreeClassificationModel
+import org.apache.spark.ml.classification.DecisionTreeClassifier
+import org.apache.spark.ml.evaluation.MulticlassClassificationEvaluator
+import org.apache.spark.ml.feature.{IndexToString, StringIndexer, VectorIndexer}
+
+import org.apache.log4j._                        //Configuracion
+Logger.getLogger("org").setLevel(Level.ERROR)  
+```
+Inciamos sesion Sprk
+```sh
+val spark = SparkSession.builder().getOrCreate()  
+```
+// se carga el archivo de datos en formato libsvm con extension txt desde la carpeta main
+```sh
+val data = spark.read.format("libsvm").load("sample_libsvm_data.txt")
+```
+Se identifican features con data categorica y se indexan  fit el conjunto de data
+```sh
+val labelIndexer = new StringIndexer()
+  .setInputCol("label")
+  .setOutputCol("indexedLabel")
+  .fit(data)
+```
+
+```sh
+```
+
+```sh
+```
+
+
+```sh
+```
+
+```sh
+```
+
+```sh
+```
+
+## Practice 4 Random forest classifier
 Importar las librerias
 ```sh
 import org.apache.spark.ml.Pipeline
