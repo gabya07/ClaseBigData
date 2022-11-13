@@ -340,11 +340,17 @@ val labelIndexer = new StringIndexer()
   .setOutputCol("indexedLabel")
   .fit(data)
 ```
-
+// Se identifican features con data categorica y se indexan  fit ajusta los datos
 ```sh
+val featureIndexer = new VectorIndexer()
+  .setInputCol("features")
+  .setOutputCol("indexedFeatures")
+  .setMaxCategories(4) 
+  .fit(data)
 ```
-
+Se parte la data en set de entrenamiento y de prueba, dejando 70% de data para entrenamiento del modelo y 30% para pruebas
 ```sh
+val Array(trainingData, testData) = data.randomSplit(Array(0.7, 0.3),seed=1234)
 ```
 
 
