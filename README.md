@@ -348,13 +348,16 @@ val featureIndexer = new VectorIndexer()
   .setMaxCategories(4) 
   .fit(data)
 ```
-Se parte la data en set de entrenamiento y de prueba, dejando 70% de data para entrenamiento del modelo y 30% para pruebas
+Se parte la data en set de entrenamiento y de prueba, dejando 70% de data para entrenamiento del modelo y 30% para pruebas se agrega el seed para darle mas randomness 
 ```sh
 val Array(trainingData, testData) = data.randomSplit(Array(0.7, 0.3),seed=1234)
 ```
 
-
+Se ejecuta el entrenmianto del modelo de Decision tree en variable dt
 ```sh
+val dt = new DecisionTreeClassifier()
+  .setLabelCol("indexedLabel")
+  .setFeaturesCol("indexedFeatures")
 ```
 
 ```sh
