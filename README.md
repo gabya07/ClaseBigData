@@ -311,7 +311,7 @@ We verify the accuracy margin resulting in 98% accuracy
 metrics.accuracy 
 res5: Double = 0.9825783972125436
 ```
-## Practice 3 Random forest classifier
+## Practice 3 Decision Tree
 Importamos librerias
 ```sh
 import org.apache.spark.ml.Pipeline
@@ -359,11 +359,60 @@ val dt = new DecisionTreeClassifier()
   .setLabelCol("indexedLabel")
   .setFeaturesCol("indexedFeatures")
 ```
-
+// Se reconvierten los labels indexados a labels
 ```sh
+val labelConverter = new IndexToString()
+  .setInputCol("prediction")
+  .setOutputCol("predictedLabel")
+  .setLabels(labelIndexer.labelsArray(0))
 ```
-
+se encadena el modelo Decision Tree dt, los labels y features en el pipeline
 ```sh
+val pipeline = new Pipeline()
+  .setStages(Array(labelIndexer, featureIndexer, dt, labelConverter))
+```
+// en entrena el modelo con la data del pipeline
+```sh
+val model = pipeline.fit(trainingData)
+```
+// Se ejecutan las predicciones el modelo con la data de prueba
+```sh
+val predictions = model.transform(testData)
+```
+// Se seleccionan los 5 registros a mostrar en el entrenamento 
+```sh
+predictions.select("predictedLabel", "label", "features").show(5)
+```
+// Evalua eficia del modelo midiendo la exactitud del error Accuracy
+```sh
+val evaluator = new MulticlassClassificationEvaluator()
+  .setLabelCol("indexedLabel")
+  .setPredictionCol("prediction")
+  .setMetricName("accuracy")
+val accuracy = evaluator.evaluate(predictions)
+println(s"Test Error = ${(1.0 - accuracy)}")
+```
+//Ejecutan las predicciones del modelo decision tree y las imprime
+```sh
+val treeModel = model.stages(2).asInstanceOf[DecisionTreeClassificationModel]
+println(s"Learned classification tree model:\n ${treeModel.toDebugString}")
+```
+Resultado
+```sh
+println(s"Test Error = ${(1.0 - accuracy)}")
+                                ^
+, numClasses=2, numFeatures=692
+Learned classification tree model:
+ DecisionTreeClassificationModel: uid=dtc_7165b6146fe7, depth=2, numNodes=5, numC, numClasses=2, numFeatures=692
+  If (feature 434 <= 88.5)
+   If (feature 99 in {2.0})
+    Predict: 0.0
+   Else (feature 99 not in {2.0})
+    Predict: 1.0
+  Else (feature 434 > 88.5)
+   Predict: 0.0
+
+
 ```
 
 ## Practice 4 Random forest classifier
