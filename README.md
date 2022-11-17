@@ -7,6 +7,7 @@
   * [Practice 2](#practice-2)
   * [Practice 3](#practice-3)
   * [Practice 4](#practice-4)
+  * [Evaluation Practice](#evaluation)
 
 ## UNIT 2
 
@@ -609,3 +610,4 @@ Learned classification forest model:
      Else (feature 209 > 6.5)
       Predict: 1.0 */
       ```
+## Evaluation
