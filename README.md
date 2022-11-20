@@ -610,4 +610,55 @@ Learned classification forest model:
      Else (feature 209 > 6.5)
       Predict: 1.0 */
       ```
-## Evaluation
+## Evaluation 2
+
+## Instrucciones: Desarrollar las siguientes instrucciones en Spark con el lenguaje de
+## programación Scala, utilizando solo la documentación de la librería de
+## Machine Learning Mllib de Spark y Google.
+1. Cargar en un dataframe de la fuente de datos Iris.csv que se encuentra en
+https://github.com/jcromerohdz/iris, elaborar la limpieza de datos necesaria para
+ser procesado por el siguiente algoritmo (Importante, esta limpieza debe ser por
+medio de un script de Scala en Spark).
+a. Utilice la librería Mllib de Spark el algoritmo de Machine Learning
+Multilayer Perceptron Classifier
+```sh
+import org.apache.spark.ml.classification.MultilayerPerceptronClassifier
+import org.apache.spark.ml.evaluation.MulticlassClassificationEvaluator
+import org.apache.spark.ml.feature.IndexToString
+import org.apache.spark.ml.feature.StringIndexer
+import org.apache.spark.ml.feature.VectorIndexer
+import org.apache.spark.ml.feature.VectorAssembler
+import org.apache.spark.ml.Pipeline
+var iris = spark.read.option("header","true").option("inferSchema", "true").format("csv").load("iris.csv")
+```
+2. ¿Cuáles son los nombres de las columnas?
+```sh
+iris.show(0)
++------------+-----------+------------+-----------+-------+
+|sepal_length|sepal_width|petal_length|petal_width|species|
++------------+-----------+------------+-----------+-------+
++------------+-----------+------------+-----------+-------+
+```
+3. ¿Cómo es el esquema?
+```sh
+iris.printSchema()
+root
+ |-- sepal_length: double (nullable = true)
+ |-- sepal_width: double (nullable = true)
+ |-- petal_length: double (nullable = true)
+ |-- petal_width: double (nullable = true)
+ |-- species: string (nullable = true)
+```
+4. Imprime las primeras 5 columnas.
+```sh
+iris.show(5)
++------------+-----------+------------+-----------+-------+
+|sepal_length|sepal_width|petal_length|petal_width|species|
++------------+-----------+------------+-----------+-------+
+|         5.1|        3.5|         1.4|        0.2| setosa|
+|         4.9|        3.0|         1.4|        0.2| setosa|
+|         4.7|        3.2|         1.3|        0.2| setosa|
+|         4.6|        3.1|         1.5|        0.2| setosa|
+|         5.0|        3.6|         1.4|        0.2| setosa|
++------------+-----------+------------+-----------+-------+
+```
