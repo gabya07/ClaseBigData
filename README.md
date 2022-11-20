@@ -729,3 +729,99 @@ iris.show(5)
 |         5.0|        3.6|         1.4|        0.2| setosa|
 +------------+-----------+------------+-----------+-------+
 ```
+5. Usa el método describe () para aprender más sobre los datos del DataFrame.
+```sh
+
+iris.describe().show()
+
++-------+------------------+-------------------+------------------+------------------+---------+
+|summary|      sepal_length|        sepal_width|      petal_length|       petal_width|  species|
++-------+------------------+-------------------+------------------+------------------+---------+
+|  count|               150|                150|               150|               150|      150|
+|   mean| 5.843333333333335| 3.0540000000000007|3.7586666666666693|1.1986666666666672|     null|
+| stddev|0.8280661279778637|0.43359431136217375| 1.764420419952262|0.7631607417008414|     null|
+|    min|               4.3|                2.0|               1.0|               0.1|   setosa|
+|    max|               7.9|                4.4|               6.9|               2.5|virginica|
++-------+------------------+-------------------+------------------+------------------+---------+
+
+```
+
+6. Haga la transformación pertinente para los datos categóricos los cuales serán nuestras etiquetas a clasificar.
+
+```sh
+val assembler = new VectorAssembler().setInputCols(Array("sepal_length", "sepal_width", "petal_length", "petal_width")).setOutputCol("features")
+```
+Total de las caractteristicas 
+```sh
+val features = assembler.transform(iris)
+```
+Toma un dato categorico y lo vuelve numerico
+
+```sh
+val indexerLabel = new StringIndexer().setInputCol("species").setOutputCol("indexedLabel").fit(features)
+
+val indexerFeatures = new VectorIndexer().setInputCol("features").setOutputCol("indexedFeatures").setMaxCategories(4)
+```
+Se seleccionan los valores para el entrenamiento y pruebas del modelo, ademas se siembre una semilla de aleatorieidad para tener mas certeza
+```sh
+val Array(training, test) = features.randomSplit(Array(0.7, 0.3), seed = 12345)
+```
+7. Construya el modelo de clasificación y explique su arquitectura.
+
+```sh
+```
+Se construyen los layers en el arreglo para crear la red, en este caso una de entreda (4), dos escondidas o intermedias (5,4) y una de salida (3)
+```sh
+val layers = Array[Int](4, 5, 4, 3)
+```
+
+Esta linea indica el inicio del entrenamiento necesario para nuestro modelo, haciendo uso de las variables definidas previamente, y asignando un numero maximo de iteraciones
+```sh
+val trainer = new MultilayerPerceptronClassifier().setLayers(layers).setLabelCol("indexedLabel").setFeaturesCol("indexedFeatures").setBlockSize(128).setSeed(1234).setMaxIter(100)
+
+val converterLabel = new IndexToString().setInputCol("prediction").setOutputCol("predictedLabel").setLabels(indexerLabel.labels)
+```
+El pipeline lo estaremos utilizando para "empaquetar" en una tuberia en trabajo de transformacion que se ha realizado para crear el modelo, 
+```sh
+val pipeline = new Pipeline().setStages(Array(indexerLabel, indexerFeatures, trainer, converterLabel))
+```
+Se va a guardar el pipeline dentro de model indicando que el modelo ya esta creado y el que se debe hacer un fit de los datos hacia lo que se tiene en training 
+```sh
+val model = pipeline.fit(training)
+```
+8. Imprima los resultados del modelo y de sus observaciones.
+
+Generamos resultados para nuestro modelo 
+```sh
+val results = model.transform(test)
+```
+
+Generamos las metricas de nuestro modelo para poder obtener la efectividad del mismo 
+```sh
+val evaluator = new MulticlassClassificationEvaluator().setLabelCol("indexedLabel").setPredictionCol("prediction").setMetricName("accuracy")
+```
+Hacemos que la efectividad o punteria de nuestro modelo sea evaluada para obtner el resultado  esperado
+
+```sh
+val accuracy = evaluator.evaluate(results)
+```
+
+
+En esta linea se manda a hacer print la efectividad de nuestro modelo, donde se observa que hemos obtenido un 97% de efectividad, lo que se considera un modelo bueno 
+```sh
+
+println("Error = " + (1.0 - accuracy))
+
+accuracy: Double = 0.9705882352941176
+Error = 0.02941176470588236
+```
+
+
+
+
+
+
+
+
+
+
