@@ -613,15 +613,18 @@ Learned classification forest model:
 ## Practice 5
 
 Importamos las librerias necesarias para la practica
+*First we will want to load the required Libraries for this practice
 ```sh
 import org.apache.spark.ml.classification.MultilayerPerceptronClassifier
 import org.apache.spark.ml.evaluation.MulticlassClassificationEvaluator
 ```  
 Descargamos y cargamos el txt "sample_multiclass_classification_data.txt, cargamos los datos en formato "libsvm" y almacenamos en el dt "data"
+*Now we will download the raw txt data "sample_multiclass_classification_data.txt" , below line will format it into libsvm format and save into the newly created DT
 ```sh
 val data = spark.read.format("libsvm").load("sample_multiclass_classification_data.txt")
 ``` 
 Asignamos un 60,40 en el array del randon split, almacenado en el dt splits, dividimos los datos en entrenamiento y prueba
+*For this practice we will assign the following values for the Random split 60 for training and 40 will be the test value
 ```sh
 val splits = data.randomSplit(Array(0.6, 0.4), seed = 1234L)
 val train = splits(0)
@@ -630,10 +633,17 @@ val test = splits(1)
 ``` 
 Especificamos los datos de entrada de la red neuronal 4 para caracteristicas, dos intermedias de 5 y 4, y 3 como salida en este caso las clases.
 almacenamos en el dt layers
+
+*We will specify entry data for the neural network as follow: 4 Characteritics, 2 Hidden layers of 5 and 4 and 3 for the output layer (the clases)
+We will save this into layers dt
+
 ```sh
 val layers = Array[Int](4, 5, 4, 3)
 ```
 Creamos el entrenador utilizando la libreria MultilayerPerceptronClassifier y asignamos los valores a sus parametros, todo esto lo guardamos en el dt trainer
+
+*We will user Library MultilayerPerceptronClassifier to create our trainer, parameter values must be assigned, dont forget to save everything into the trainer value
+
 ```sh
 val trainer = new MultilayerPerceptronClassifier()
   .setLayers(layers)
@@ -641,11 +651,14 @@ val trainer = new MultilayerPerceptronClassifier()
   .setSeed(1234L)
   .setMaxIter(100)
 ```
-// Guardamos en el dt model el entrenamiento del modelo 
+ Guardamos en el dt model el entrenamiento del modelo 
+After the trainer is created we will proceed and save it into the model dt
+
  ```sh
  val model = trainer.fit(train)
 ```
  Precisamos los calculos necesarios para poder ejecutar las pruebas, 
+ Setting up required operations so we can execute our tests
 ```sh
 val result = model.transform(test)
 val predictionAndLabels = result.select("prediction", "label")
@@ -653,11 +666,14 @@ val evaluator = new MulticlassClassificationEvaluator()
   .setMetricName("accuracy")
 ```
 imprimimos la precision de la prueba de acuerdo al evaluador
+ Now we print Tests precision according to the evluator 
+
 ```sh
 println(s"Test set accuracy = ${evaluator.evaluate(predictionAndLabels)}")
 ```
 output = Test set accuracy = 0.9523809523809523
 en este caso el resultado nos arrojo una precision del 95% lo que nos indica que es un modelo relativamente bueno.
+*For this run we got the output as follows : Precision of 95%, which indicates our model is good.
  
  ```sh
 ```     
