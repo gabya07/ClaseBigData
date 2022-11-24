@@ -779,8 +779,7 @@ val Array(training, test) = features.randomSplit(Array(0.7, 0.3), seed = 12345)
 
 7. Construya el modelo de clasificación y explique su arquitectura.
 
-```sh
-```
+
 Se construyen los layers en el arreglo para crear la red, en este caso una de entreda (4), dos escondidas o intermedias (5,4) y una de salida (3) que corresponde a los tipos de flor setosa, virginica y versicolor.
 ```sh
 val layers = Array[Int](4, 5, 4, 3)
