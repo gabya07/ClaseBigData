@@ -679,15 +679,17 @@ output = Test set accuracy = 0.9523809523809523
 
 ## Evaluation #2
 
-## Instrucciones: Desarrollar las siguientes instrucciones en Spark con el lenguaje de
-## programación Scala, utilizando solo la documentación de la librería de
-## Machine Learning Mllib de Spark y Google.
+## Instrucciones: Desarrollar las siguientes instrucciones en Spark con el lenguaje de programación Scala, utilizando solo la documentación de a librería de Machine Learning Mllib de Spark y Google.
+
 1. Cargar en un dataframe de la fuente de datos Iris.csv que se encuentra en
 https://github.com/jcromerohdz/iris, elaborar la limpieza de datos necesaria para
 ser procesado por el siguiente algoritmo (Importante, esta limpieza debe ser por
 medio de un script de Scala en Spark).
 a. Utilice la librería Mllib de Spark el algoritmo de Machine Learning
 Multilayer Perceptron Classifier
+
+Se importan librerias necesarias para generar el modelo, ademas se esta creando el DT con nombre iris en donde se carga la session.
+
 ```sh
 import org.apache.spark.ml.classification.MultilayerPerceptronClassifier
 import org.apache.spark.ml.evaluation.MulticlassClassificationEvaluator
@@ -699,6 +701,7 @@ import org.apache.spark.ml.Pipeline
 var iris = spark.read.option("header","true").option("inferSchema", "true").format("csv").load("iris.csv")
 ```
 2. ¿Cuáles son los nombres de las columnas?
+
 ```sh
 iris.show(0)
 +------------+-----------+------------+-----------+-------+
@@ -707,6 +710,9 @@ iris.show(0)
 +------------+-----------+------------+-----------+-------+
 ```
 3. ¿Cómo es el esquema?
+
+Aqui se describe el tipo de datos que conforma el data frame.
+
 ```sh
 iris.printSchema()
 root
@@ -717,6 +723,9 @@ root
  |-- species: string (nullable = true)
 ```
 4. Imprime las primeras 5 columnas.
+
+Aqui se imprimen los encabezados y los primeros 5 renglones.
+
 ```sh
 iris.show(5)
 +------------+-----------+------------+-----------+-------+
@@ -730,8 +739,9 @@ iris.show(5)
 +------------+-----------+------------+-----------+-------+
 ```
 5. Usa el método describe () para aprender más sobre los datos del DataFrame.
-```sh
+Describe nos genera medidas estandar del dataframe para entederlo un poco mejor.
 
+```sh
 iris.describe().show()
 
 +-------+------------------+-------------------+------------------+------------------+---------+
@@ -748,29 +758,30 @@ iris.describe().show()
 
 6. Haga la transformación pertinente para los datos categóricos los cuales serán nuestras etiquetas a clasificar.
 
+Aqui se definene los datos de entrada del modelo 
 ```sh
 val assembler = new VectorAssembler().setInputCols(Array("sepal_length", "sepal_width", "petal_length", "petal_width")).setOutputCol("features")
 ```
-Total de las caractteristicas 
+ Total de las caractteristicas
 ```sh
 val features = assembler.transform(iris)
 ```
-Toma un dato categorico y lo vuelve numerico
-
+Toma un dato categorico y lo vuelve numerico, fit ajusta el contenido de los datos para incluir todas las etiquetas en el indice. Ademas con idenxerFeatures asignamos el numero maximo de categorias 
 ```sh
 val indexerLabel = new StringIndexer().setInputCol("species").setOutputCol("indexedLabel").fit(features)
 
 val indexerFeatures = new VectorIndexer().setInputCol("features").setOutputCol("indexedFeatures").setMaxCategories(4)
 ```
-Se seleccionan los valores para el entrenamiento y pruebas del modelo, ademas se siembre una semilla de aleatorieidad para tener mas certeza
+Se seleccionan los valores para el entrenamiento y pruebas del modelo, ademas se siembre una semilla de aleatorieidad para tener mas certeza e los resultados
 ```sh
 val Array(training, test) = features.randomSplit(Array(0.7, 0.3), seed = 12345)
 ```
+
 7. Construya el modelo de clasificación y explique su arquitectura.
 
 ```sh
 ```
-Se construyen los layers en el arreglo para crear la red, en este caso una de entreda (4), dos escondidas o intermedias (5,4) y una de salida (3)
+Se construyen los layers en el arreglo para crear la red, en este caso una de entreda (4), dos escondidas o intermedias (5,4) y una de salida (3) que corresponde a los tipos de flor setosa, virginica y versicolor.
 ```sh
 val layers = Array[Int](4, 5, 4, 3)
 ```
@@ -778,20 +789,22 @@ val layers = Array[Int](4, 5, 4, 3)
 Esta linea indica el inicio del entrenamiento necesario para nuestro modelo, haciendo uso de las variables definidas previamente, y asignando un numero maximo de iteraciones
 ```sh
 val trainer = new MultilayerPerceptronClassifier().setLayers(layers).setLabelCol("indexedLabel").setFeaturesCol("indexedFeatures").setBlockSize(128).setSeed(1234).setMaxIter(100)
-
+```
+Convierte las etiqueta indexadas en etiquetas originales 
+```sh
 val converterLabel = new IndexToString().setInputCol("prediction").setOutputCol("predictedLabel").setLabels(indexerLabel.labels)
 ```
-El pipeline lo estaremos utilizando para "empaquetar" en una tuberia en trabajo de transformacion que se ha realizado para crear el modelo, 
+El pipeline lo estaremos utilizando para "empaquetar" en una tuberia el trabajo de transformacion que se ha realizado para crear el modelo, 
 ```sh
 val pipeline = new Pipeline().setStages(Array(indexerLabel, indexerFeatures, trainer, converterLabel))
 ```
-Se va a guardar el pipeline dentro de model indicando que el modelo ya esta creado y el que se debe hacer un fit de los datos hacia lo que se tiene en training 
+Se va a guardar el pipeline dentro de model indicando que el modelo ya esta creado y el que se debe hacer un fit de los datos de training para despues alamcenarlos en el model
 ```sh
 val model = pipeline.fit(training)
 ```
 8. Imprima los resultados del modelo y de sus observaciones.
 
-Generamos resultados para nuestro modelo 
+Generamos resultados para nuestro modelo, trasformando test y guardando en resultados 
 ```sh
 val results = model.transform(test)
 ```
