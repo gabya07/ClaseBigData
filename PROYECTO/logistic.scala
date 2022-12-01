@@ -1,7 +1,11 @@
 import org.apache.spark.ml.classification.LogisticRegression
 import org.apache.spark.sql.SparkSession
-
 import org.apache.log4j._
+import org.apache.spark.ml.feature.{VectorAssembler, StringIndexer, VectorIndexer, OneHotEncoder}
+import org.apache.spark.ml.linalg.Vectors
+import org.apache.spark.ml.Pipeline
+import org.apache.spark.mllib.evaluation.MulticlassMetrics
+
 Logger.getLogger("org").setLevel(Level.ERROR)
 
 val spark = SparkSession.builder().getOrCreate()
@@ -27,8 +31,6 @@ for(ind <- Range(1, colnames.length)){
 
 // val logregdata = logregdataall.na.drop()
 
-// import org.apache.spark.ml.feature.{VectorAssembler, StringIndexer, VectorIndexer, OneHotEncoder}
-// import org.apache.spark.ml.linalg.Vectors
 
 // // Convertir strings a valores numericos - Transforming string into numerical values
 // val genderIndexer = new StringIndexer().setInputCol("Sex").setOutputCol("SexIndex")
@@ -45,8 +47,6 @@ for(ind <- Range(1, colnames.length)){
 
 // val Array(training, test) = logregdata.randomSplit(Array(0.7, 0.3), seed = 12345)
 
-// import org.apache.spark.ml.Pipeline
-
 // val lr = new LogisticRegression()
 
 // // val pipeline = new Pipeline().setStages(Array(genderIndexer,embarkIndexer,embarkEncoder,assembler,lr))
@@ -55,10 +55,6 @@ for(ind <- Range(1, colnames.length)){
 // val model = pipeline.fit(training)
 
 // val results = model.transform(test)
-
-
-// //Probar el modelo solo se puede con la libreria vieja
-// import org.apache.spark.mllib.evaluation.MulticlassMetrics
 
 // val predictionAndLabels = results.select($"prediction",$"label").as[(Double, Double)].rdd
 // val metrics = new MulticlassMetrics(predictionAndLabels)
