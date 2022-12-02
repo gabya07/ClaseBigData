@@ -13,6 +13,8 @@
 
 
 ## Log-Regression
+
+We import the necessary libraries to implement the logistic regression model in spark
 ```sh
 import org.apache.spark.ml.classification.LogisticRegression
 import org.apache.spark.sql.SparkSession
@@ -22,16 +24,18 @@ import org.apache.spark.ml.linalg.Vectors
 import org.apache.spark.ml.Pipeline
 import org.apache.spark.mllib.evaluation.MulticlassMetrics
 ```
+We avoid warnings
 ```sh
 Logger.getLogger("org").setLevel(Level.ERROR)
 
 ```
-
+We start the session in spark and read with Spark the data of "bank-full.csv" in CSV format, which we store in Val "data"
 ```sh
 val spark = SparkSession.builder().getOrCreate()
 
 val data  = spark.read.option("header","true").option("inferSchema", "true").format("csv").load("bank-full.csv")
 ```
+We review the data of the data set to see what we face with show, describe and inferchema, then identify that the column "y" will be our main search pattern and rename the column "YIndex" to "label".
 ```sh
 data.show(0)
 data.describe().show()
@@ -41,11 +45,12 @@ data1.printSchema()
 val logregdataall = (data1.select(data1("yIndex").as("label"), $"age",$"job", $"marital",
                     $"education", $"default", $"balance", $"housing", $"loan", $"contact", $"day", $"month", $"duration", $"campaign", $"pdays", $"previous", $"poutcome"))
 ```
+We use drop in the data set
 ```sh
 val logregdata = logregdataall.na.drop()
 ```
+Transforming string into numerical values
 ```sh
-// Convertir strings a valores numericos - Transforming string into numerical values
 val jobIndexer = new StringIndexer().setInputCol("job").setOutputCol("jobIndex")
 val educationIndexer = new StringIndexer().setInputCol("education").setOutputCol("educationIndex")
 val maritalIndexer = new StringIndexer().setInputCol("marital").setOutputCol("maritalIndex")
@@ -56,9 +61,8 @@ val contactIndexer = new StringIndexer().setInputCol("contact").setOutputCol("co
 val monthIndexer = new StringIndexer().setInputCol("month").setOutputCol("monthIndex")
 val poutcomeIndexer = new StringIndexer().setInputCol("poutcome").setOutputCol("poutcomeIndex")
 ```
-
+Convert numeric values to One Hot Encoding 0 - 1
 ```sh
-// Convertir los valores numericos a One Hot Encoding 0 - 1
 val jobEncoder = new OneHotEncoder().setInputCol("jobIndex").setOutputCol("jobVec")
 val educationEncoder = new OneHotEncoder().setInputCol("educationIndex").setOutputCol("educationVec")
 val maritalEncoder = new OneHotEncoder().setInputCol("maritalIndex").setOutputCol("maritalVec")
@@ -71,33 +75,38 @@ val poutcomeEncoder = new OneHotEncoder().setInputCol("poutcomeIndex").setOutput
 // Assemble everything together to be ("label","features") format
 
 ```
+We define the input data of the model
 ```sh
-//Haga la transformación pertinente para los datos categóricos los cuales serán nuestras etiquetas a clasificar.
 val assembler = new VectorAssembler().setInputCols(Array("age","jobVec","maritalVec","educationVec","defaultVec","balance","housingVec","loanVec","contactVec","day","monthVec","duration","campaign","pdays","previous","poutcomeVec")).setOutputCol("features")
 
 ```
+The values are selected for the training and testing of the model, in addition a seed of randomness is sown to have more certainty and the results
 ```sh
 
 val Array(training, test) = logregdata.randomSplit(Array(0.7, 0.3), seed = 45354)
 ```
+We create a "LogisticRegression" object named "Ir"
 ```sh
 val lr = new LogisticRegression()
 ```
+We create a new "Pipeline" object with the elements of the one hot encoder, store the data frame in "pipeline", We adjust "fit" of the pipeline for "training", we store the data frame in val "model".
 ```sh
 val pipeline = new Pipeline().setStages(Array(jobIndexer,maritalIndexer,educationIndexer,defaultIndexer,housingIndexer,loanIndexer,contactIndexer,monthIndexer,poutcomeIndexer,jobEncoder,maritalEncoder,educationEncoder,defaultEncoder,housingEncoder,loanEncoder,contactEncoder,monthEncoder,poutcomeEncoder,assembler,lr))
 
 val model = pipeline.fit(training)
 ```
-
+We store in "results" the test set using transform
 ```sh
 val results = model.transform(test)
 ```
+We convert the test results into RDD, store the data frame in val "predictionAndLabels"
 ```sh
 val predictionAndLabels = results.select($"prediction",$"label").as[(Double, Double)].rdd
 val metrics = new MulticlassMetrics(predictionAndLabels)
 ```
+we print confusion matrix
 ```sh
-// Matriz de confusion
+Matriz de confusion
 println("Confusion matrix:")
 println(metrics.confusionMatrix)
 
