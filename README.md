@@ -104,7 +104,7 @@ We convert the test results into RDD, store the data frame in val "predictionAnd
 val predictionAndLabels = results.select($"prediction",$"label").as[(Double, Double)].rdd
 val metrics = new MulticlassMetrics(predictionAndLabels)
 ```
-we print confusion matrix
+We print confusion matrix
 ```sh
 Matriz de confusion
 println("Confusion matrix:")
