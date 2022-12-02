@@ -4,12 +4,15 @@
 ## Content
 - [Clase Big Data](#clase-big-data)
   * [Proyecto](#proyecto)
+  * [Log-Regression](#logregression)
+  * [Multilayer-Perceptron ](#Multilayer)
 
 ## UNIT 3
 
 ## Proyecto
 
 
+## Log-Regression
 ```sh
 import org.apache.spark.ml.classification.LogisticRegression
 import org.apache.spark.sql.SparkSession
