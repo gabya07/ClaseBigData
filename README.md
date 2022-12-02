@@ -23,11 +23,13 @@ import org.apache.spark.mllib.evaluation.MulticlassMetrics
 Logger.getLogger("org").setLevel(Level.ERROR)
 
 ```
+
+```sh
 val spark = SparkSession.builder().getOrCreate()
 
 val data  = spark.read.option("header","true").option("inferSchema", "true").format("csv").load("bank-full.csv")
-
-
+```
+```sh
 data.show(0)
 data.describe().show()
 val yIndexer = new StringIndexer().setInputCol("y").setOutputCol("yIndex")
@@ -35,9 +37,11 @@ val data1 = yIndexer.fit(data).transform(data)
 data1.printSchema()
 val logregdataall = (data1.select(data1("yIndex").as("label"), $"age",$"job", $"marital",
                     $"education", $"default", $"balance", $"housing", $"loan", $"contact", $"day", $"month", $"duration", $"campaign", $"pdays", $"previous", $"poutcome"))
-
+```
+```sh
 val logregdata = logregdataall.na.drop()
-
+```
+```sh
 // Convertir strings a valores numericos - Transforming string into numerical values
 val jobIndexer = new StringIndexer().setInputCol("job").setOutputCol("jobIndex")
 val educationIndexer = new StringIndexer().setInputCol("education").setOutputCol("educationIndex")
@@ -48,7 +52,9 @@ val loanIndexer = new StringIndexer().setInputCol("loan").setOutputCol("loanInde
 val contactIndexer = new StringIndexer().setInputCol("contact").setOutputCol("contactIndex")
 val monthIndexer = new StringIndexer().setInputCol("month").setOutputCol("monthIndex")
 val poutcomeIndexer = new StringIndexer().setInputCol("poutcome").setOutputCol("poutcomeIndex")
+```
 
+```sh
 // Convertir los valores numericos a One Hot Encoding 0 - 1
 val jobEncoder = new OneHotEncoder().setInputCol("jobIndex").setOutputCol("jobVec")
 val educationEncoder = new OneHotEncoder().setInputCol("educationIndex").setOutputCol("educationVec")
@@ -60,6 +66,8 @@ val contactEncoder = new OneHotEncoder().setInputCol("contactIndex").setOutputCo
 val monthEncoder = new OneHotEncoder().setInputCol("monthIndex").setOutputCol("monthVec")
 val poutcomeEncoder = new OneHotEncoder().setInputCol("poutcomeIndex").setOutputCol("poutcomeVec")
 // Assemble everything together to be ("label","features") format
+
+```
 //Haga la transformación pertinente para los datos categóricos los cuales serán nuestras etiquetas a clasificar.
 val assembler = new VectorAssembler().setInputCols(Array("age","jobVec","maritalVec","educationVec","defaultVec","balance","housingVec","loanVec","contactVec","day","monthVec","duration","campaign","pdays","previous","poutcomeVec")).setOutputCol("features")
 
