@@ -109,6 +109,68 @@ metrics.accuracy
 
 
 ```sh
+import org.apache.spark.ml.classification.MultilayerPerceptronClassifier
+import org.apache.spark.ml.evaluation.MulticlassClassificationEvaluator
+import org.apache.spark.ml.feature.IndexToString
+import org.apache.spark.ml.feature.StringIndexer
+import org.apache.spark.ml.feature.VectorIndexer
+import org.apache.spark.ml.feature.VectorAssembler
+import org.apache.spark.ml.Pipeline
+
+
+//Importar librerias utilizables con el modelo multilayer
+//Y los indexadores para clasificar
+```
+
+```sh
+//Importar datos desde el csv, limpieza de datos, cambiamos var data a bank-full por el infer schema
+val bank = spark.read.option("header", "true").option("inferSchema", "true").format("csv").load("bank-full.csv")
+
+```
+
+```sh
+//Nombres de las columnas, Ver cómo es el esquema y describe () para aprender más sobre los datos del DataFrame.
+bank.na.drop().show(false)
+bank.show(0)
+bank.describe().show()
+bank.printSchema()
+```
+
+
+```sh
+val jobIndexer = new StringIndexer().setInputCol("job").setOutputCol("jobIndex")
+val educationIndexer = new StringIndexer().setInputCol("education").setOutputCol("educationIndex")
+val maritalIndexer = new StringIndexer().setInputCol("marital").setOutputCol("maritalIndex")
+val defaultIndexer = new StringIndexer().setInputCol("default").setOutputCol("defaultIndex")
+val housingIndexer = new StringIndexer().setInputCol("housing").setOutputCol("housingIndex")
+val loanIndexer = new StringIndexer().setInputCol("loan").setOutputCol("loanIndex")
+val contactIndexer = new StringIndexer().setInputCol("contact").setOutputCol("contactIndex")
+val monthIndexer = new StringIndexer().setInputCol("month").setOutputCol("monthIndex")
+val poutcomeIndexer = new StringIndexer().setInputCol("poutcome").setOutputCol("poutcomeIndex")
+```
+
+```sh
+val indexed = educationIndexer.fit(bank).transform(bank)
+val indexed1 = jobIndexer.fit(indexed).transform(indexed)
+val indexed2 = maritalIndexer.fit(indexed1).transform(indexed1)
+val indexed3 = defaultIndexer.fit(indexed2).transform(indexed2)
+val indexed4 = housingIndexer.fit(indexed3).transform(indexed3)
+val indexed5 = loanIndexer.fit(indexed4).transform(indexed4)
+val indexed6 = contactIndexer.fit(indexed5).transform(indexed5)
+val indexed7 = monthIndexer.fit(indexed6).transform(indexed6)
+val indexed8 = poutcomeIndexer.fit(indexed7).transform(indexed7)
+```
+
+```sh
+//delete columns
+indexed8.drop("job","marital","education","default","housing","loan","contact","month", "poutcome").show(false)
+```
+
+```sh
+// Assemble everything together to be ("label","features") format
+//Haga la transformación pertinente para los datos categóricos los cuales serán nuestras etiquetas a clasificar.
+val assembler = new VectorAssembler().setInputCols(Array("age","jobIndex","maritalIndex","educationIndex","defaultIndex","balance","housingIndex","loanIndex","previous","poutcomeIndex")).setOutputCol("features")
+
 ```
 
 ```sh
@@ -116,7 +178,6 @@ metrics.accuracy
 
 ```sh
 ```
-
 
 ```sh
 ```
