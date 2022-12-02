@@ -198,14 +198,3 @@ val accuracy = evaluator.evaluate(results)
 println("Error = " + (1.0 - accuracy))
 ```
 
-```sh
-```
-
-```sh
-```
-
-```sh
-```
-
-```sh
-```
