@@ -43,17 +43,18 @@ val indexed8 = poutcomeIndexer.fit(indexed7).transform(indexed7)
 indexed8.drop("job","marital","education","default","housing","loan","contact","month", "poutcome").show(false)
 // Assemble everything together to be ("label","features") format
 //Haga la transformación pertinente para los datos categóricos los cuales serán nuestras etiquetas a clasificar.
-val assembler = new VectorAssembler().setInputCols(Array("age","jobIndex","maritalIndex","educationIndex","defaultIndex","balance","housingIndex","loanIndex","previous","poutcomeIndex")).setOutputCol("features")
+val assembler = new VectorAssembler().setInputCols(Array("age","jobIndex","maritalIndex","educationIndex","defaultIndex","balance","housingIndex","loanIndex","contactIndex","day","monthIndex","duration","campaign","pdays","previous","poutcomeIndex")).setOutputCol("features")
+//val assembler = new VectorAssembler().setInputCols(Array("age","jobVec","maritalVec","educationVec","defaultVec","balance","housingVec","loanVec","contactVec","day","monthVec","duration","campaign","pdays","previous","poutcomeVec")).setOutputCol("features")
 
 val features = assembler.transform(indexed8)
 // Agarra un dato categorico y lo vuelve numerico
 val indexerLabel = new StringIndexer().setInputCol("y").setOutputCol("indexedLabel").fit(features)
-val indexerFeatures = new VectorIndexer().setInputCol("features").setOutputCol("indexedFeatures").setMaxCategories(10)
-val Array(training, test) = features.randomSplit(Array(0.7, 0.3), seed = 12327)
+val indexerFeatures = new VectorIndexer().setInputCol("features").setOutputCol("indexedFeatures").setMaxCategories(16)
+val Array(training, test) = features.randomSplit(Array(0.7, 0.3), seed = 7777)
 
 // //Construir el modelo de clasificación y explique su arquitectura.
-val layers = Array[Int](10,8,6,2)
-val trainer = new MultilayerPerceptronClassifier().setLayers(layers).setLabelCol("indexedLabel").setFeaturesCol("indexedFeatures").setBlockSize(12345).setSeed(1234).setMaxIter(2123)
+val layers = Array[Int](16, 3, 2)
+val trainer = new MultilayerPerceptronClassifier().setLayers(layers).setLabelCol("indexedLabel").setFeaturesCol("indexedFeatures").setBlockSize(12345).setSeed(1234).setMaxIter(123)
 val converterLabel = new IndexToString().setInputCol("prediction").setOutputCol("predictedLabel").setLabels(indexerLabel.labels)
 val pipeline = new Pipeline().setStages(Array(indexerLabel, indexerFeatures, trainer, converterLabel))
 val model = pipeline.fit(training)
@@ -63,4 +64,3 @@ val results = model.transform(test)
 val evaluator = new MulticlassClassificationEvaluator().setLabelCol("indexedLabel").setPredictionCol("prediction").setMetricName("accuracy")
 val accuracy = evaluator.evaluate(results)
 println("Error = " + (1.0 - accuracy))
-

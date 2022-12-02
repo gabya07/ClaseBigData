@@ -19,7 +19,7 @@ val yIndexer = new StringIndexer().setInputCol("y").setOutputCol("yIndex")
 val data1 = yIndexer.fit(data).transform(data)
 data1.printSchema()
 val logregdataall = (data1.select(data1("yIndex").as("label"), $"age",$"job", $"marital",
-                    $"education", $"default", $"balance", $"housing", $"loan", $"previous", $"poutcome"))
+                    $"education", $"default", $"balance", $"housing", $"loan", $"contact", $"day", $"month", $"duration", $"campaign", $"pdays", $"previous", $"poutcome"))
 
 val logregdata = logregdataall.na.drop()
 
@@ -30,6 +30,8 @@ val maritalIndexer = new StringIndexer().setInputCol("marital").setOutputCol("ma
 val defaultIndexer = new StringIndexer().setInputCol("default").setOutputCol("defaultIndex")
 val housingIndexer = new StringIndexer().setInputCol("housing").setOutputCol("housingIndex")
 val loanIndexer = new StringIndexer().setInputCol("loan").setOutputCol("loanIndex")
+val contactIndexer = new StringIndexer().setInputCol("contact").setOutputCol("contactIndex")
+val monthIndexer = new StringIndexer().setInputCol("month").setOutputCol("monthIndex")
 val poutcomeIndexer = new StringIndexer().setInputCol("poutcome").setOutputCol("poutcomeIndex")
 
 // Convertir los valores numericos a One Hot Encoding 0 - 1
@@ -39,16 +41,18 @@ val maritalEncoder = new OneHotEncoder().setInputCol("maritalIndex").setOutputCo
 val defaultEncoder = new OneHotEncoder().setInputCol("defaultIndex").setOutputCol("defaultVec")
 val housingEncoder = new OneHotEncoder().setInputCol("housingIndex").setOutputCol("housingVec")
 val loanEncoder = new OneHotEncoder().setInputCol("loanIndex").setOutputCol("loanVec")
+val contactEncoder = new OneHotEncoder().setInputCol("contactIndex").setOutputCol("contactVec")
+val monthEncoder = new OneHotEncoder().setInputCol("monthIndex").setOutputCol("monthVec")
 val poutcomeEncoder = new OneHotEncoder().setInputCol("poutcomeIndex").setOutputCol("poutcomeVec")
 // Assemble everything together to be ("label","features") format
 //Haga la transformación pertinente para los datos categóricos los cuales serán nuestras etiquetas a clasificar.
-val assembler = new VectorAssembler().setInputCols(Array("age","jobVec","maritalVec","educationVec","defaultVec","balance","housingVec","loanVec","previous","poutcomeVec")).setOutputCol("features")
+val assembler = new VectorAssembler().setInputCols(Array("age","jobVec","maritalVec","educationVec","defaultVec","balance","housingVec","loanVec","contactVec","day","monthVec","duration","campaign","pdays","previous","poutcomeVec")).setOutputCol("features")
 
-val Array(training, test) = logregdata.randomSplit(Array(0.7, 0.3), seed = 7777)
+val Array(training, test) = logregdata.randomSplit(Array(0.7, 0.3), seed = 23456)
 
 val lr = new LogisticRegression()
 
-val pipeline = new Pipeline().setStages(Array(jobIndexer,maritalIndexer,educationIndexer,defaultIndexer,housingIndexer,loanIndexer,poutcomeIndexer,jobEncoder,maritalEncoder,educationEncoder,defaultEncoder,housingEncoder,loanEncoder,poutcomeEncoder,assembler,lr))
+val pipeline = new Pipeline().setStages(Array(jobIndexer,maritalIndexer,educationIndexer,defaultIndexer,housingIndexer,loanIndexer,contactIndexer,monthIndexer,poutcomeIndexer,jobEncoder,maritalEncoder,educationEncoder,defaultEncoder,housingEncoder,loanEncoder,contactEncoder,monthEncoder,poutcomeEncoder,assembler,lr))
 
 val model = pipeline.fit(training)
 
