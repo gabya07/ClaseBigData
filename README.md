@@ -4,7 +4,7 @@
 ## Content
 - [Clase Big Data](#clase-big-data)
   * [Proyecto](#proyecto)
-  * [Log-Regression](#logregression)
+  * [Log-Regression](#log-regression)
   * [Multilayer-Perceptron ](#Multilayer)
 
 ## UNIT 3
