@@ -68,22 +68,32 @@ val poutcomeEncoder = new OneHotEncoder().setInputCol("poutcomeIndex").setOutput
 // Assemble everything together to be ("label","features") format
 
 ```
+```sh
 //Haga la transformación pertinente para los datos categóricos los cuales serán nuestras etiquetas a clasificar.
 val assembler = new VectorAssembler().setInputCols(Array("age","jobVec","maritalVec","educationVec","defaultVec","balance","housingVec","loanVec","contactVec","day","monthVec","duration","campaign","pdays","previous","poutcomeVec")).setOutputCol("features")
 
+```
+```sh
+
 val Array(training, test) = logregdata.randomSplit(Array(0.7, 0.3), seed = 45354)
-
+```
+```sh
 val lr = new LogisticRegression()
-
+```
+```sh
 val pipeline = new Pipeline().setStages(Array(jobIndexer,maritalIndexer,educationIndexer,defaultIndexer,housingIndexer,loanIndexer,contactIndexer,monthIndexer,poutcomeIndexer,jobEncoder,maritalEncoder,educationEncoder,defaultEncoder,housingEncoder,loanEncoder,contactEncoder,monthEncoder,poutcomeEncoder,assembler,lr))
 
 val model = pipeline.fit(training)
+```
 
+```sh
 val results = model.transform(test)
-
+```
+```sh
 val predictionAndLabels = results.select($"prediction",$"label").as[(Double, Double)].rdd
 val metrics = new MulticlassMetrics(predictionAndLabels)
-
+```
+```sh
 // Matriz de confusion
 println("Confusion matrix:")
 println(metrics.confusionMatrix)
