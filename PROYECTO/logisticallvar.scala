@@ -48,7 +48,7 @@ val poutcomeEncoder = new OneHotEncoder().setInputCol("poutcomeIndex").setOutput
 //Haga la transformación pertinente para los datos categóricos los cuales serán nuestras etiquetas a clasificar.
 val assembler = new VectorAssembler().setInputCols(Array("age","jobVec","maritalVec","educationVec","defaultVec","balance","housingVec","loanVec","contactVec","day","monthVec","duration","campaign","pdays","previous","poutcomeVec")).setOutputCol("features")
 
-val Array(training, test) = logregdata.randomSplit(Array(0.7, 0.3), seed = 23456)
+val Array(training, test) = logregdata.randomSplit(Array(0.7, 0.3), seed = 45354)
 
 val lr = new LogisticRegression()
 
