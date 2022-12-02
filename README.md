@@ -171,6 +171,34 @@ indexed8.drop("job","marital","education","default","housing","loan","contact","
 //Haga la transformación pertinente para los datos categóricos los cuales serán nuestras etiquetas a clasificar.
 val assembler = new VectorAssembler().setInputCols(Array("age","jobIndex","maritalIndex","educationIndex","defaultIndex","balance","housingIndex","loanIndex","previous","poutcomeIndex")).setOutputCol("features")
 
+val features = assembler.transform(indexed8)
+```
+
+```sh
+// Agarra un dato categorico y lo vuelve numerico
+val indexerLabel = new StringIndexer().setInputCol("y").setOutputCol("indexedLabel").fit(features)
+val indexerFeatures = new VectorIndexer().setInputCol("features").setOutputCol("indexedFeatures").setMaxCategories(10)
+val Array(training, test) = features.randomSplit(Array(0.7, 0.3), seed = 12327)
+```
+
+```sh
+// //Construir el modelo de clasificación y explique su arquitectura.
+val layers = Array[Int](10,8,6,2)
+val trainer = new MultilayerPerceptronClassifier().setLayers(layers).setLabelCol("indexedLabel").setFeaturesCol("indexedFeatures").setBlockSize(12345).setSeed(1234).setMaxIter(2123)
+val converterLabel = new IndexToString().setInputCol("prediction").setOutputCol("predictedLabel").setLabels(indexerLabel.labels)
+val pipeline = new Pipeline().setStages(Array(indexerLabel, indexerFeatures, trainer, converterLabel))
+val model = pipeline.fit(training)
+```
+
+```sh
+// //Resultados del modelo y de sus observaciones.
+val results = model.transform(test)
+val evaluator = new MulticlassClassificationEvaluator().setLabelCol("indexedLabel").setPredictionCol("prediction").setMetricName("accuracy")
+val accuracy = evaluator.evaluate(results)
+println("Error = " + (1.0 - accuracy))
+```
+
+```sh
 ```
 
 ```sh
