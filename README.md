@@ -5,7 +5,7 @@
 - [Clase Big Data](#clase-big-data)
   * [Proyecto](#proyecto)
   * [Log-Regression](#log-regression)
-  * [Multilayer-Perceptron ](#Multilayer)
+  * [Multilayer-Perceptron ](#Multilayer-Perceptron)
 
 ## UNIT 3
 
@@ -102,4 +102,21 @@ println("Confusion matrix:")
 println(metrics.confusionMatrix)
 
 metrics.accuracy
+```
+
+
+## Multilayer-Perceptron
+
+
+```sh
+```
+
+```sh
+```
+
+```sh
+```
+
+
+```sh
 ```
